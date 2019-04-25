@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width initial-scale=1.0" />
-    <title>What2Wear</title>
-    <link rel="stylesheet" href="/style.css" />
-    <script defer src="/bundle.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Description" content="A progressive weather app" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>What to wear</title>
   </head>
   <body>
     <div id="app"></div>
+
+    <!-- <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/sw.js')
+            .then(reg => {
+              console.log('Registered!:', reg);
+            })
+            .catch(e => console.log('Registration failed:', e));
+        });
+      }
+    </script> -->
+    <script src="bundle.js"></script>
   </body>
 </html>

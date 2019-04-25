@@ -37,8 +37,11 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
+    "cities": "^2.0.0",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.0.0",
+    "dark-sky-api": "^0.6.32",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "express-session": "^1.15.1",
     "history": "^4.9.0",

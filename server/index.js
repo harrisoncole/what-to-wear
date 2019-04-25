@@ -7,7 +7,13 @@ const passport = require('passport')
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const DarkSkyApi = require('dark-sky-api')
+require('dotenv').config()
+const cities = require('cities')
 module.exports = app
+
+DarkSkyApi.apiKey = process.env.DARK_SKY_KEY
+DarkSkyApi.proxy = true
 
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
@@ -92,6 +98,11 @@ const startListening = () => {
 async function bootApp() {
   await createApp()
   await startListening()
+  const city = cities.zipLookup(10025)
+  const position = {latitude: city.latitude, longitude: city.longitude}
+  DarkSkyApi.loadCurrent(position).then(result =>
+    console.log("todoay's weather:", result)
+  )
 }
 // This evaluates as true when this file is run directly from the command line,
 // i.e. when we say 'node server/index.js' (or 'nodemon server/index.js', or 'nodemon server', etc)
