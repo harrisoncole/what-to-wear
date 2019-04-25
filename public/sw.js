@@ -1,5 +1,5 @@
 const cacheName = 'cache-v1'
-const resourcesToPrecache = ['/', 'index.html', 'style.css']
+const resourcesToPrecache = ['/', 'index.html', 'style.css', 'bundle.js']
 
 self.addEventListener('install', event => {
   console.log('Install event!')

@@ -10,18 +10,18 @@
   <body>
     <div id="app"></div>
 
-    <!-- <script>
+    <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker
             .register('/sw.js')
             .then(reg => {
-              console.log('Registered!:', reg);
+              console.log('Registered!:', reg)
             })
-            .catch(e => console.log('Registration failed:', e));
-        });
+            .catch(e => console.log('Registration failed:', e))
+        })
       }
-    </script> -->
+    </script>
     <script src="bundle.js"></script>
   </body>
 </html>
