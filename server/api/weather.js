@@ -5,12 +5,40 @@ const cities = require('cities')
 DarkSkyApi.apiKey = process.env.DARK_SKY_KEY
 DarkSkyApi.proxy = true
 
-router.get('/:city', async (req, res, next) => {
+const zipNotFound = new Error('zip code not found')
+zipNotFound.status = 404
+
+router.get('/:zip/weekly', async (req, res, next) => {
   try {
-    const city = req.params.city
-    const cityPos = cities.zipLookup(city)
-    const weatherObj = await DarkSkyApi.loadCurrent(cityPos)
-    res.json(weatherObj)
+    const zip = Number(req.params.zip)
+    const cityPos = cities.zip_lookup(zip)
+    if (cityPos) {
+      const weatherObj = await DarkSkyApi.loadForecast({
+        latitude: 42.3601,
+        longitude: -71.0589
+      })
+      res.json(weatherObj)
+    } else {
+      next(zipNotFound)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/:zip', async (req, res, next) => {
+  try {
+    const zip = Number(req.params.zip)
+    const cityPos = cities.zip_lookup(zip)
+    if (cityPos) {
+      const weatherObj = await DarkSkyApi.loadCurrent({
+        latitude: 42.3601,
+        longitude: -71.0589
+      })
+      res.json(weatherObj)
+    } else {
+      next(zipNotFound)
+    }
   } catch (error) {
     next(error)
   }
