@@ -26,19 +26,26 @@ router.get('/:zip/weekly', async (req, res, next) => {
   }
 })
 
-router.get('/:zip', async (req, res, next) => {
+router.post('/:daily', async (req, res, next) => {
   try {
-    const zip = Number(req.params.zip)
-    const cityPos = cities.zip_lookup(zip)
-    if (cityPos) {
+    if (req.body.lat && req.body.long) {
       const weatherObj = await DarkSkyApi.loadCurrent({
-        latitude: 42.3601,
-        longitude: -71.0589
+        latitude: req.body.lat,
+        longitude: req.body.long
       })
       res.json(weatherObj)
     } else {
       next(zipNotFound)
     }
+    // if (cityPos) {
+    //   const weatherObj = await DarkSkyApi.loadCurrent({
+    //     latitude: 42.3601,
+    //     longitude: -71.0589
+    //   })
+    //   res.json(weatherObj)
+    // } else {
+    //   next(zipNotFound)
+    // }
   } catch (error) {
     next(error)
   }

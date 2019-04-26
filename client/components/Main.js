@@ -1,21 +1,37 @@
 import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import {getCurrentWeather, getCoords} from '../utils'
 import CreateIcon from './CreateIcon'
 
 const Main = ({displayButton, deferredPrompt}) => {
   const [weather, setWeather] = useState({})
-  const [coords, setCoords] = useState([0, 0])
+  const [coords, setCoords] = useState({})
 
   console.log('synchonicity test:')
   useEffect(() => {
     async function getCoords() {
       await navigator.geolocation.getCurrentPosition(pos => {
-        setCoords([pos.coords.latitude, pos.coords.longitude])
-        console.log('coords:', [pos.coords.latitude, pos.coords.longitude])
+        setCoords({lat: pos.coords.latitude, long: pos.coords.longitude})
       })
     }
     getCoords()
   }, [])
+
+  useEffect(
+    () => {
+      async function getCurrentWeather(coordObj) {
+        const {data} = await axios.post(`/api/weather/daily`, coordObj)
+        console.log('weather data:', data)
+        setWeather(data)
+      }
+
+      if (coords.lat) {
+        getCurrentWeather(coords)
+      }
+    },
+    [coords]
+  )
+
   return (
     <div>
       <h1>Hello Naked Person</h1>
@@ -26,11 +42,11 @@ const Main = ({displayButton, deferredPrompt}) => {
         <h2>I'm waiting...</h2>
       )} */}
 
-      {coords[0] === 0 && coords[1] === 0 ? (
-        <h2> I'm waiting...</h2>
+      {!coords.lat ? (
+        <h2> loading...</h2>
       ) : (
         <h2>
-          Current Coords: {coords[0]}, {coords[1]}
+          Current Coords: {coords.lat}, {coords.long}
         </h2>
       )}
 

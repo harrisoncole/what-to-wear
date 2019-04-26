@@ -5,8 +5,8 @@ export async function getWeekForecast(zip) {
   return data
 }
 
-export async function getCurrentWeather(zip) {
-  const {data} = await axios.get(`/api/weather/${zip}`)
+export async function getCurrentWeather(coordObj) {
+  const {data} = await axios.post(`/api/weather/daily`, coordObj)
   return data
 }
 
