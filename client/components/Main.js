@@ -21,7 +21,6 @@ const Main = ({displayButton, deferredPrompt}) => {
     () => {
       async function getCurrentWeather(coordObj) {
         const {data} = await axios.post(`/api/weather/daily`, coordObj)
-        console.log('weather data:', data)
         setWeather(data)
       }
 
@@ -45,9 +44,18 @@ const Main = ({displayButton, deferredPrompt}) => {
       {!coords.lat ? (
         <h2> loading...</h2>
       ) : (
-        <h2>
-          Current Coords: {coords.lat}, {coords.long}
-        </h2>
+        <div>
+          <h3>
+            You are here: {coords.lat}, {coords.long}
+          </h3>
+          <h3>Today's weather: </h3>
+          <p>
+            {weather.summary}, {weather.temperature} degrees, with a{' '}
+            {weather.precipProbability * 100}% chance of {weather.precipType}.
+            There's {weather.cloudCover * 100}% cloud cover. The current UV
+            Index is {weather.uvIndex}.
+          </p>
+        </div>
       )}
 
       {displayButton && <CreateIcon deferredPrompt={deferredPrompt} />}
