@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import CreateIcon from './CreateIcon'
 
-const Main = ({displayButton, deferredPrompt}) => {
+const Main = () => {
   const [weather, setWeather] = useState({})
   const [coords, setCoords] = useState('')
+  const [displayButton, setDisplayButton] = useState(false)
+  const [prompt, setPrompt] = useState({})
 
   useEffect(() => {
     const storage = window.localStorage
@@ -38,6 +40,14 @@ const Main = ({displayButton, deferredPrompt}) => {
     [coords]
   )
 
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', evt => {
+      evt.preventDefault()
+      setPrompt(evt)
+      setDisplayButton(true)
+    })
+  }, [])
+
   return (
     <div>
       <h1>Hello Naked Person</h1>
@@ -58,7 +68,9 @@ const Main = ({displayButton, deferredPrompt}) => {
         </div>
       )}
 
-      {displayButton && <CreateIcon deferredPrompt={deferredPrompt} />}
+      {displayButton && (
+        <CreateIcon prompt={prompt} setDisplayButton={setDisplayButton} />
+      )}
     </div>
   )
 }

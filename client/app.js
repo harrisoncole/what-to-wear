@@ -3,10 +3,10 @@ import Main from './components/Main'
 // import {Navbar} from './components'
 // import Routes from './routes'
 
-const App = ({displayButton, deferredPrompt}) => {
+const App = () => {
   return (
     <div>
-      <Main displayButton={displayButton} deferredPrompt={deferredPrompt} />
+      <Main />
     </div>
   )
 }
