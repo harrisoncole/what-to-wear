@@ -3,7 +3,7 @@
   "short_name": "W2W",
   "theme_color": "#21d4f3",
   "background_color": "#2196f3",
-  "display": "browser",
+  "display": "fullscreen",
   "orientation": "portrait",
   "Scope": "/",
   "start_url": "/",

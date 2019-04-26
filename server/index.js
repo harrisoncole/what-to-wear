@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 const express = require('express')
 const morgan = require('morgan')
 const compression = require('compression')
@@ -7,6 +8,12 @@ const passport = require('passport')
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const https = require('https')
+
+const certOptions = {
+  key: fs.readFileSync(path.resolve('./server.key')),
+  cert: fs.readFileSync(path.resolve('./server.crt'))
+}
 
 module.exports = app
 
@@ -81,10 +88,19 @@ const createApp = () => {
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () =>
-    console.log(`Cloud cover on port ${PORT}`)
-  )
+  let server
+  // if (process.env.NODE_ENV === 'development') {
+  //   server = https.createServer(certOptions, app).listen(PORT)
+  //   console.log(`Secure cloud cover on port ${PORT}`)
+  // } else {
+  //   server = app.listen(PORT, () => {
+  //     console.log(`Cloud cover on port ${PORT}`)
+  //   })
+  // }
 
+  server = app.listen(PORT, () => {
+    console.log('Cloud cover on port ', PORT)
+  })
   // set up our socket control center
   const io = socketio(server)
   require('./socket')(io)
