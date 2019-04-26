@@ -4,16 +4,24 @@ import CreateIcon from './CreateIcon'
 
 const Main = ({displayButton, deferredPrompt}) => {
   const [weather, setWeather] = useState({})
-  const [coords, setCoords] = useState({})
+  const [coords, setCoords] = useState('')
 
-  console.log('synchonicity test:')
   useEffect(() => {
+    const storage = window.localStorage
     async function getCoords() {
       await navigator.geolocation.getCurrentPosition(pos => {
-        setCoords({lat: pos.coords.latitude, long: pos.coords.longitude})
+        let current = pos.coords.latitude + '_' + pos.coords.longitude
+        window.localStorage.lat = pos.coords.latitude
+        window.localStorage.long = pos.coords.longitude
+        setCoords(current)
       })
     }
-    getCoords()
+    if (storage.lat && storage.long) {
+      setCoords(storage.lat + '_' + storage.long)
+      getCoords()
+    } else {
+      getCoords()
+    }
   }, [])
 
   useEffect(
@@ -23,8 +31,8 @@ const Main = ({displayButton, deferredPrompt}) => {
         setWeather(data)
       }
 
-      if (coords.lat) {
-        getCurrentWeather(coords.lat + '_' + coords.long)
+      if (coords.length > 0) {
+        getCurrentWeather(coords)
       }
     },
     [coords]
@@ -33,19 +41,12 @@ const Main = ({displayButton, deferredPrompt}) => {
   return (
     <div>
       <h1>Hello Naked Person</h1>
-
-      {/* {weather.temperature ? (
-        <h2>Current temp: {weather.temperature}</h2>
-      ) : (
-        <h2>I'm waiting...</h2>
-      )} */}
-
-      {!coords.lat ? (
+      {!coords.length > 0 ? (
         <h2> loading...</h2>
       ) : (
         <div>
           <h3>
-            You are here: {coords.lat}, {coords.long}
+            You are here: {coords.split('_')[0]}, {coords.split('_')[1]}
           </h3>
           <h3>Today's weather: </h3>
           <p>

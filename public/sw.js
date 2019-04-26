@@ -32,7 +32,7 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     fetch(event.request).catch(() => {
       console.log('fetch intercepted for :', event.request.url)
-      return caches.open(cacheName).then(cache => cache.match(event.request))
+      return caches.open(cacheName).then(cache => cache.match('offline.html'))
     })
   )
 })
