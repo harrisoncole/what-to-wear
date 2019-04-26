@@ -22,18 +22,17 @@ router.get('/:coords', async (req, res, next) => {
     next(error)
   }
 })
-
-router.post('/weekly', async (req, res, next) => {
+router.get('/:coords/forecast', async (req, res, next) => {
   try {
-    if (req.body.lat && req.body.long) {
-      const weatherObj = await DarkSkyApi.loadForecast({
-        latitude: req.body.lat,
-        longitude: req.body.long
-      })
-      res.json(weatherObj)
-    } else {
-      next(zipNotFound)
-    }
+    const [latitude, longitude] = req.params.coords
+      .split('_')
+      .map(c => Number(c))
+
+    const weatherObj = await DarkSkyApi.loadForecast({
+      latitude,
+      longitude
+    })
+    res.json(weatherObj.daily.data[0])
   } catch (error) {
     next(error)
   }

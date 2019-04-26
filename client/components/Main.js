@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import CreateIcon from './CreateIcon'
 import Weather from './Weather'
+import Forecast from './Forecast'
 
 const Main = () => {
   const [weather, setWeather] = useState({})
+  const [forecast, setForecast] = useState({})
   const [coords, setCoords] = useState('')
   const [displayButton, setDisplayButton] = useState(false)
   const [prompt, setPrompt] = useState({})
@@ -31,7 +33,9 @@ const Main = () => {
     () => {
       async function getCurrentWeather(coordStr) {
         const {data} = await axios.get(`/api/weather/${coordStr}`)
+        const fcst = await axios.get(`/api/weather/${coordStr}/forecast`)
         setWeather(data)
+        setForecast(fcst.data)
       }
 
       if (coords.length > 0) {
@@ -60,6 +64,7 @@ const Main = () => {
             You are here: {coords.split('_')[0]}, {coords.split('_')[1]}
           </h4>
           <Weather weather={weather} />
+          <Forecast forecast={forecast} />
         </div>
       )}
 
