@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import {getCurrentWeather, getCoords} from '../utils'
 import CreateIcon from './CreateIcon'
 
 const Main = ({displayButton, deferredPrompt}) => {
@@ -19,13 +18,13 @@ const Main = ({displayButton, deferredPrompt}) => {
 
   useEffect(
     () => {
-      async function getCurrentWeather(coordObj) {
-        const {data} = await axios.post(`/api/weather/daily`, coordObj)
+      async function getCurrentWeather(coordStr) {
+        const {data} = await axios.get(`/api/weather/${coordStr}`)
         setWeather(data)
       }
 
       if (coords.lat) {
-        getCurrentWeather(coords)
+        getCurrentWeather(coords.lat + '_' + coords.long)
       }
     },
     [coords]

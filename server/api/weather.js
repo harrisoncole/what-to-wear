@@ -1,35 +1,32 @@
 const router = require('express').Router()
 const DarkSkyApi = require('dark-sky-api')
 require('dotenv').config()
-const cities = require('cities')
 DarkSkyApi.apiKey = process.env.DARK_SKY_KEY
 DarkSkyApi.proxy = true
 
 const zipNotFound = new Error('zip code not found')
 zipNotFound.status = 404
 
-router.get('/:zip/weekly', async (req, res, next) => {
+router.get('/:coords', async (req, res, next) => {
   try {
-    const zip = Number(req.params.zip)
-    const cityPos = cities.zip_lookup(zip)
-    if (cityPos) {
-      const weatherObj = await DarkSkyApi.loadForecast({
-        latitude: 42.3601,
-        longitude: -71.0589
-      })
-      res.json(weatherObj)
-    } else {
-      next(zipNotFound)
-    }
+    const [latitude, longitude] = req.params.coords
+      .split('_')
+      .map(c => Number(c))
+
+    const weatherObj = await DarkSkyApi.loadCurrent({
+      latitude,
+      longitude
+    })
+    res.json(weatherObj)
   } catch (error) {
     next(error)
   }
 })
 
-router.post('/:daily', async (req, res, next) => {
+router.post('/weekly', async (req, res, next) => {
   try {
     if (req.body.lat && req.body.long) {
-      const weatherObj = await DarkSkyApi.loadCurrent({
+      const weatherObj = await DarkSkyApi.loadForecast({
         latitude: req.body.lat,
         longitude: req.body.long
       })
@@ -37,24 +34,9 @@ router.post('/:daily', async (req, res, next) => {
     } else {
       next(zipNotFound)
     }
-    // if (cityPos) {
-    //   const weatherObj = await DarkSkyApi.loadCurrent({
-    //     latitude: 42.3601,
-    //     longitude: -71.0589
-    //   })
-    //   res.json(weatherObj)
-    // } else {
-    //   next(zipNotFound)
-    // }
   } catch (error) {
     next(error)
   }
 })
 
 module.exports = router
-
-// const city = cities.zipLookup(10025)
-// const position = {latitude: city.latitude, longitude: city.longitude}
-// DarkSkyApi.loadCurrent(position).then(result =>
-//   console.log("todoay's weather:", result)
-// )
