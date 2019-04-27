@@ -3,6 +3,7 @@ import axios from 'axios'
 import CreateIcon from './CreateIcon'
 import Weather from './Weather'
 import Forecast from './Forecast'
+import {getLatitude, getLongitude} from '../utils'
 
 const Main = () => {
   const [weather, setWeather] = useState({})
@@ -12,17 +13,21 @@ const Main = () => {
   const [prompt, setPrompt] = useState({})
 
   useEffect(() => {
-    const storage = window.localStorage
     async function getCoords() {
       await navigator.geolocation.getCurrentPosition(pos => {
         let current = pos.coords.latitude + '_' + pos.coords.longitude
-        window.localStorage.lat = pos.coords.latitude
-        window.localStorage.long = pos.coords.longitude
-        setCoords(current)
+        if (
+          getLatitude() !== pos.coords.latitude.toString() ||
+          getLongitude() !== pos.coords.longitude.toString()
+        ) {
+          window.localStorage.setItem('lat', pos.coords.latitude.toString())
+          window.localStorage.setItem('long', pos.coords.longitude.toString())
+          setCoords(current)
+        }
       })
     }
-    if (storage.lat && storage.long) {
-      setCoords(storage.lat + '_' + storage.long)
+    if (getLatitude() && getLongitude()) {
+      setCoords(getLatitude() + '_' + getLongitude())
       getCoords()
     } else {
       getCoords()
@@ -56,7 +61,7 @@ const Main = () => {
   return (
     <div>
       <h1>Hello Naked Person</h1>
-      {!coords.length > 0 ? (
+      {!weather.summary ? (
         <h2> loading...</h2>
       ) : (
         <div>

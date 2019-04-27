@@ -5,3 +5,11 @@ export function unixToTime(unixStr) {
   const minutes = '0' + date.getMinutes()
   return hours + ':' + minutes.substr(-2)
 }
+
+export function getLatitude() {
+  return window.localStorage.getItem('lat')
+}
+
+export function getLongitude() {
+  return window.localStorage.getItem('long')
+}
