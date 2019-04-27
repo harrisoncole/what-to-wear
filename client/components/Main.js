@@ -3,7 +3,9 @@ import axios from 'axios'
 import CreateIcon from './CreateIcon'
 import Weather from './Weather'
 import Forecast from './Forecast'
-import {getLatitude, getLongitude} from '../utils'
+import Location from './Location'
+import moment from 'moment'
+import {getLatitude, getLongitude, getTime, compareTime} from '../utils'
 
 const Main = () => {
   const [weather, setWeather] = useState({})
@@ -15,6 +17,7 @@ const Main = () => {
 
   useEffect(() => {
     async function getCoords() {
+      window.localStorage.setItem('time', JSON.stringify(moment()))
       await navigator.geolocation.getCurrentPosition(pos => {
         let current = pos.coords.latitude + '_' + pos.coords.longitude
         if (
@@ -29,13 +32,19 @@ const Main = () => {
         }
       })
     }
+
     if (getLatitude() && getLongitude()) {
-      setCoords(getLatitude() + '_' + getLongitude())
-      getCoords()
+      let now = moment()
+      let then = getTime()
+      if (compareTime(now, then) > 10) {
+        setCoords(getLatitude() + '_' + getLongitude())
+        getCoords()
+      } else {
+        setCoords(getLatitude() + '_' + getLongitude())
+      }
     } else {
       getCoords()
     }
-    getCoords()
   }, [])
 
   useEffect(
@@ -77,14 +86,8 @@ const Main = () => {
           <h2> I'm thinking, okay?</h2>
         ) : (
           <div>
-            <h4>
-              {address} <br />
-              <span id="coords">
-                [{coords.split('_')[0].slice(0, 10)},{' '}
-                {coords.split('_')[1].slice(0, 10)}]
-              </span>
-            </h4>
             <Weather weather={weather} />
+            <Location address={address} coords={coords} />
             <Forecast forecast={forecast} currentTemp={weather.temperature} />
           </div>
         )}

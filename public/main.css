@@ -6,8 +6,14 @@ h1 {
   font-size: 15px;
   border: 0.5px solid #05668d;
   padding: 10px;
+  margin-bottom: 0;
 }
 
+#temp {
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 2px;
+}
 #tm {
   font-size: 8px;
   align-self: flex-end;

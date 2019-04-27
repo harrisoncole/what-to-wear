@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export function unixToTime(unixStr) {
   console.log('unix string:', unixStr)
   const date = new Date(unixStr * 1000)
@@ -12,4 +14,12 @@ export function getLatitude() {
 
 export function getLongitude() {
   return window.localStorage.getItem('long')
+}
+
+export function getTime() {
+  return JSON.parse(window.localStorage.getItem('time'))
+}
+
+export function compareTime(now, then) {
+  return moment.duration(now.diff(then))._data.minutes
 }

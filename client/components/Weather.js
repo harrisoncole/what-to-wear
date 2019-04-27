@@ -3,13 +3,11 @@ import React from 'react'
 const Weather = ({weather}) => {
   return (
     <div>
-      <h3>Current weather: </h3>
+      <h3 id="temp">{weather.temperature}&deg;</h3>
       <p>
-        {weather.summary}, {weather.temperature} degrees, with a{' '}
-        {weather.precipProbability * 100}% chance of{' '}
-        {weather.precipType ? weather.precipType : 'precipitation'}. There's{' '}
-        {weather.cloudCover * 100}% cloud cover. The current UV Index is{' '}
-        {weather.uvIndex}.
+        {weather.summary}, with a {Math.floor(weather.precipProbability * 100)}%
+        chance of {weather.precipType ? weather.precipType : 'precipitation'}.
+        There's {weather.cloudCover * 100}% cloud cover.
       </p>
     </div>
   )
