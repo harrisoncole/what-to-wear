@@ -59,17 +59,20 @@ const Main = () => {
   }, [])
 
   return (
-    <div>
-      <h1>Hello Naked Person</h1>
+    <div className="home-container">
+      <h1 className="title">
+        What to Wear <i class="fas fa-globe-americas" />
+      </h1>
+      <h2>Hello Naked Person.</h2>
       {!weather.summary ? (
-        <h2> loading...</h2>
+        <h2> I'm thinking, okay?</h2>
       ) : (
         <div>
           <h4>
             You are here: {coords.split('_')[0]}, {coords.split('_')[1]}
           </h4>
           <Weather weather={weather} />
-          <Forecast forecast={forecast} />
+          <Forecast forecast={forecast} currentTemp={weather.temperature} />
         </div>
       )}
 

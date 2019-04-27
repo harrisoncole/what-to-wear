@@ -2,7 +2,7 @@ import React from 'react'
 import {unixToTime} from '../utils'
 import Wardrobe from './Wardrobe'
 
-const Forecast = ({forecast}) => {
+const Forecast = ({forecast, currentTemp}) => {
   const highTime = unixToTime(forecast.temperatureHighTime)
   const lowTime = unixToTime(forecast.temperatureLowTime)
   const sunrise = unixToTime(forecast.sunriseTime)
@@ -14,7 +14,7 @@ const Forecast = ({forecast}) => {
   const humidity = forecast.humidity * 100
   const uvIndex = forecast.uvIndex
   const cloudCover = forecast.cloudCover * 100
-  const props = {high, low, cloudCover, precipProb}
+  const props = {high, low, cloudCover, precipProb, currentTemp}
   return (
     <div>
       {low === 'NaN' ? (
@@ -29,7 +29,7 @@ const Forecast = ({forecast}) => {
             {humidity}% and there's a UV Index of {uvIndex}. There will be an
             average of {cloudCover}% cloud cover.
           </p>
-          {/* <Wardrobe {...props} /> */}
+          <Wardrobe {...props} />
         </div>
       )}
     </div>
