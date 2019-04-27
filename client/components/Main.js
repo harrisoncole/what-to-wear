@@ -18,8 +18,10 @@ const Main = () => {
       await navigator.geolocation.getCurrentPosition(pos => {
         let current = pos.coords.latitude + '_' + pos.coords.longitude
         if (
-          getLatitude() !== pos.coords.latitude.toString() ||
-          getLongitude() !== pos.coords.longitude.toString()
+          Math.floor(Number(getLatitude())) !==
+            Math.floor(pos.coords.latitude) ||
+          Math.floor(Number(getLongitude())) !==
+            Math.floor(pos.coords.longitude)
         ) {
           window.localStorage.setItem('lat', pos.coords.latitude.toString())
           window.localStorage.setItem('long', pos.coords.longitude.toString())
@@ -33,6 +35,7 @@ const Main = () => {
     } else {
       getCoords()
     }
+    getCoords()
   }, [])
 
   useEffect(
@@ -77,7 +80,8 @@ const Main = () => {
             <h4>
               {address} <br />
               <span id="coords">
-                [{coords.split('_')[0]}, {coords.split('_')[1]}]
+                [{coords.split('_')[0].slice(0, 10)},{' '}
+                {coords.split('_')[1].slice(0, 10)}]
               </span>
             </h4>
             <Weather weather={weather} />

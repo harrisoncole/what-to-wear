@@ -24,6 +24,7 @@ h1 {
 .home-container {
   width: 450px;
   margin: 20px;
+  padding-right: 20px;
 }
 
 .home-container-inner > h2,
