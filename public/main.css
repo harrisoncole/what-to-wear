@@ -32,10 +32,21 @@ h1 {
   width: 450px;
   margin: 20px;
   padding-right: 20px;
+  text-align: center;
+}
+.home-container p,
+.home-container li {
+  text-align: left;
 }
 
-.home-container-inner > h2,
+.home-container-inner > h3,
 .home-container-inner > h4,
 .home-container-inner > div {
   padding-left: 10px;
+}
+
+.clothing-recs > h3 {
+  margin-bottom: 2px;
+  padding-bottom: 0;
+  text-align: left;
 }

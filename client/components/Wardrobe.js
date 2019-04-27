@@ -31,20 +31,22 @@ const Wardrobe = ({
   }
 
   return (
-    <div>
+    <div className="clothing-recs">
       <h3> Here are my thoughts on clothes: </h3>
-      {umbrella && <div> Bring an umbrella! </div>}
-      {jacket ? (
-        <div> You'll want a {jacket} for this weather. </div>
-      ) : (
-        <div> No need for a jacket today! </div>
-      )}
-      {sungear && (
-        <div>
-          {' '}
-          There's a high UV index today, so wear sunscreen or bring a hat!{' '}
-        </div>
-      )}
+      <ul>
+        {umbrella && <li> Bring an umbrella! </li>}
+        {jacket ? (
+          <li> You'll want a {jacket} for this weather. </li>
+        ) : (
+          <li> No need for a jacket today! </li>
+        )}
+        {sungear && (
+          <li>
+            {' '}
+            There's a high UV index today, so wear sunscreen or bring a hat!{' '}
+          </li>
+        )}
+      </ul>
     </div>
   )
 }

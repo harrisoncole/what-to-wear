@@ -1,15 +1,21 @@
 import React from 'react'
 import Location from './Location'
+import {avgXHrPctMetric, roundedPercent} from '../utils'
 
 const Weather = ({weather, address, coords}) => {
+  const today = weather.daily.data[0]
+  const avgPrecip = avgXHrPctMetric(weather.hourly.data, 8, 'precipProbability')
+
   return (
     <div>
-      <h3 id="temp">{weather.temperature}&deg;</h3>
-      <Location address={address} coords={coords} />
+      <h3 id="temp">{weather.currently.temperature}&deg;</h3>
+      <Location address={address} />
       <p>
-        {weather.summary}, with a {Math.floor(weather.precipProbability * 100)}%
-        chance of {weather.precipType ? weather.precipType : 'precipitation'}.
-        There's {weather.cloudCover * 100}% cloud cover.
+        {weather.hourly.summary}{' '}
+        {roundedPercent(weather.currently.precipProbability)}% chance of{' '}
+        {today.precipType ? today.precipType : 'precipitation'} at the moment,
+        and {avgPrecip}% average over the next 8 hours. There's{' '}
+        {roundedPercent(today.cloudCover)}% cloud cover.
       </p>
     </div>
   )

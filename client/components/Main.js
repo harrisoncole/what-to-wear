@@ -8,7 +8,6 @@ import moment from 'moment'
 import {getLatitude, getLongitude, getTime, compareTime} from '../utils'
 
 const Main = () => {
-  const [weather, setWeather] = useState({})
   const [forecast, setForecast] = useState({})
   const [coords, setCoords] = useState('')
   const [displayButton, setDisplayButton] = useState(false)
@@ -50,10 +49,8 @@ const Main = () => {
   useEffect(
     () => {
       async function getCurrentWeather(coordStr) {
-        const {data} = await axios.get(`/api/weather/${coordStr}`)
-        const fcst = await axios.get(`/api/weather/${coordStr}/forecast`)
-        setWeather(data.weather)
-        setForecast(fcst.data)
+        const {data} = await axios.get(`/api/weather/${coordStr}/forecast`)
+        setForecast(data.forecast)
         setAddress(data.address)
       }
 
@@ -81,13 +78,16 @@ const Main = () => {
         <span id="tm">powered by Dark Sky</span>
       </h1>
       <div className="home-container-inner">
-        <h2>Hello Naked Person.</h2>
-        {!weather.summary ? (
+        <h3>Hello Naked Person.</h3>
+        {!forecast.currently ? (
           <h2> I'm thinking, okay?</h2>
         ) : (
           <div>
-            <Weather weather={weather} address={address} coords={coords} />
-            <Forecast forecast={forecast} currentTemp={weather.temperature} />
+            <Weather weather={forecast} address={address} coords={coords} />
+            <Forecast
+              forecast={forecast}
+              currentTemp={forecast.currently.temperature}
+            />
           </div>
         )}
 

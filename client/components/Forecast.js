@@ -1,38 +1,41 @@
 import React from 'react'
-import {unixToTime} from '../utils'
+import {
+  unixToTime,
+  nextXHrs,
+  maxMetric,
+  minMetric,
+  avgXHrPctMetric
+} from '../utils'
 import Wardrobe from './Wardrobe'
 
 const Forecast = ({forecast, currentTemp}) => {
-  const highTime = unixToTime(forecast.temperatureHighTime)
-  const lowTime = unixToTime(forecast.temperatureLowTime)
-  const sunrise = unixToTime(forecast.sunriseTime)
-  const sunset = unixToTime(forecast.sunsetTime)
-  const maxRainTime = unixToTime(forecast.precipIntensityMaxTime)
-  const precipProb = Math.floor(forecast.precipProbability * 100)
-  const precipType = forecast.precipType
-  const high = forecast.temperatureHigh
-  const low = forecast.temperatureLow
-  const humidity = Math.floor(forecast.humidity * 100)
-  const uvIndex = forecast.uvIndex
-  const cloudCover = Math.floor(forecast.cloudCover * 100)
-  const props = {high, low, cloudCover, precipProb, currentTemp}
+  const hourlyArr = forecast.hourly.data.slice(0, 8)
+
+  const [maxRainTime, maxRain] = maxMetric(hourlyArr, 'precipIntensity')
+  const [highTime, high] = maxMetric(hourlyArr, 'temperature')
+  const [lowTime, low] = minMetric(hourlyArr, 'temperature')
+  const precipProb = avgXHrPctMetric(hourlyArr, 8, 'precipProbability')
+
+  const humidity = avgXHrPctMetric(hourlyArr, 8, 'humidity')
+  const [indexTime, uvIndex] = maxMetric(hourlyArr, 'uvIndex')
+  const cloudCover = avgXHrPctMetric(hourlyArr, 8, 'cloudCover')
+  const props = {high, low, cloudCover, currentTemp}
   return (
     <div>
       {low === 'NaN' ? (
         <p>loading...</p>
       ) : (
         <div>
+          <Wardrobe {...props} />
           <p>
-            Today's forecast has a low of {low} at {lowTime}, a high of {high}{' '}
-            at {highTime}. Sunrise at {sunrise} and sunset at {sunset}. There's
-            a {precipProb}% chance of{' '}
-            {precipType ? precipType : 'precipitation'}.{' '}
-            {maxRainTime &&
-              `Precipitation will be most intense at  ${maxRainTime}. `}Humidity
+            Today's forecast has a low of {Math.floor(low)}&deg; at {lowTime}, a
+            high of {Math.ceil(high)}&deg; at {highTime}. There's a {precipProb}%
+            average chance of precipitation.{' '}
+            {maxRain > 0.1 &&
+              `The most intense precipitation is forecast for ${maxRainTime}. `}Humidity
             will be {humidity}% and there's a UV Index of {uvIndex}. There will
             be an average of {cloudCover}% cloud cover.
           </p>
-          <Wardrobe {...props} />
         </div>
       )}
     </div>

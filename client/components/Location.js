@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Location = ({address, coords}) => {
+const Location = ({address}) => {
   const [street, city, stateZip, country] = address.split(', ')
   return (
     <div>
@@ -10,10 +10,6 @@ const Location = ({address, coords}) => {
         </span>
       )}
       <br />
-      <span id="coords">
-        [{coords.split('_')[0].slice(0, 10)},{' '}
-        {coords.split('_')[1].slice(0, 10)}]
-      </span>
     </div>
   )
 }
