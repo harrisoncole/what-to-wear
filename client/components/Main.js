@@ -86,8 +86,7 @@ const Main = () => {
           <h2> I'm thinking, okay?</h2>
         ) : (
           <div>
-            <Weather weather={weather} />
-            <Location address={address} coords={coords} />
+            <Weather weather={weather} address={address} coords={coords} />
             <Forecast forecast={forecast} currentTemp={weather.temperature} />
           </div>
         )}
