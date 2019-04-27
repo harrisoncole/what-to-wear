@@ -4,9 +4,21 @@
 
 h1 {
   font-size: 15px;
+  border: 2px solid #05668d;
+  padding: 10px;
+}
+
+#tm {
+  font-size: 8px;
+  align-self: flex-end;
+}
+.title {
+  display: flex;
+  justify-content: space-between;
 }
 
 .home-container {
-  width: 400px;
+  width: 500px;
   margin: 20px;
+  padding: 10px;
 }

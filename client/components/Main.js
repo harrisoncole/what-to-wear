@@ -63,7 +63,10 @@ const Main = () => {
   return (
     <div className="home-container">
       <h1 className="title">
-        What to Wear <i class="fas fa-globe-americas" />
+        <span>
+          What to Wear <i class="fas fa-globe-americas" />{' '}
+        </span>
+        <span id="tm">powered by Dark Sky</span>
       </h1>
       <h2>Hello Naked Person.</h2>
       {!weather.summary ? (
