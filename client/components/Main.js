@@ -68,25 +68,27 @@ const Main = () => {
         </span>
         <span id="tm">powered by Dark Sky</span>
       </h1>
-      <h2>Hello Naked Person.</h2>
-      {!weather.summary ? (
-        <h2> I'm thinking, okay?</h2>
-      ) : (
-        <div>
-          <h4>
-            {address}{' '}
-            <span>
-              [{coords.split('_')[0]}, {coords.split('_')[1]}]
-            </span>
-          </h4>
-          <Weather weather={weather} />
-          <Forecast forecast={forecast} currentTemp={weather.temperature} />
-        </div>
-      )}
+      <div className="home-container-inner">
+        <h2>Hello Naked Person.</h2>
+        {!weather.summary ? (
+          <h2> I'm thinking, okay?</h2>
+        ) : (
+          <div>
+            <h4>
+              {address} <br />
+              <span id="coords">
+                [{coords.split('_')[0]}, {coords.split('_')[1]}]
+              </span>
+            </h4>
+            <Weather weather={weather} />
+            <Forecast forecast={forecast} currentTemp={weather.temperature} />
+          </div>
+        )}
 
-      {displayButton && (
-        <CreateIcon prompt={prompt} setDisplayButton={setDisplayButton} />
-      )}
+        {displayButton && (
+          <CreateIcon prompt={prompt} setDisplayButton={setDisplayButton} />
+        )}
+      </div>
     </div>
   )
 }

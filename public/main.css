@@ -4,7 +4,7 @@
 
 h1 {
   font-size: 15px;
-  border: 2px solid #05668d;
+  border: 0.5px solid #05668d;
   padding: 10px;
 }
 
@@ -12,13 +12,22 @@ h1 {
   font-size: 8px;
   align-self: flex-end;
 }
+
+#coords {
+  font-size: 10px;
+}
 .title {
   display: flex;
   justify-content: space-between;
 }
 
 .home-container {
-  width: 500px;
+  width: 450px;
   margin: 20px;
-  padding: 10px;
+}
+
+.home-container-inner > h2,
+.home-container-inner > h4,
+.home-container-inner > div {
+  padding-left: 10px;
 }
