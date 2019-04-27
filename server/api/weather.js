@@ -1,6 +1,9 @@
 const router = require('express').Router()
 const DarkSkyApi = require('dark-sky-api')
-require('dotenv').config()
+const axios = require('axios')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 DarkSkyApi.apiKey = process.env.DARK_SKY_KEY
 DarkSkyApi.proxy = true
 
@@ -17,7 +20,13 @@ router.get('/:coords', async (req, res, next) => {
       latitude,
       longitude
     })
-    res.json(weatherObj)
+
+    const {data} = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${
+        process.env.GOOGLE_MAPS_KEY
+      }`
+    )
+    res.json({weather: weatherObj, address: data.results[0].formatted_address})
   } catch (error) {
     next(error)
   }

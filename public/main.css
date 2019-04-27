@@ -1,0 +1,12 @@
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  font-size: 15px;
+}
+
+.home-container {
+  width: 400px;
+  margin: 20px;
+}

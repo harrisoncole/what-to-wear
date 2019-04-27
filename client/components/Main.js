@@ -11,6 +11,7 @@ const Main = () => {
   const [coords, setCoords] = useState('')
   const [displayButton, setDisplayButton] = useState(false)
   const [prompt, setPrompt] = useState({})
+  const [address, setAddress] = useState('')
 
   useEffect(() => {
     async function getCoords() {
@@ -39,8 +40,9 @@ const Main = () => {
       async function getCurrentWeather(coordStr) {
         const {data} = await axios.get(`/api/weather/${coordStr}`)
         const fcst = await axios.get(`/api/weather/${coordStr}/forecast`)
-        setWeather(data)
+        setWeather(data.weather)
         setForecast(fcst.data)
+        setAddress(data.address)
       }
 
       if (coords.length > 0) {
@@ -69,7 +71,10 @@ const Main = () => {
       ) : (
         <div>
           <h4>
-            You are here: {coords.split('_')[0]}, {coords.split('_')[1]}
+            {address}{' '}
+            <span>
+              [{coords.split('_')[0]}, {coords.split('_')[1]}]
+            </span>
           </h4>
           <Weather weather={weather} />
           <Forecast forecast={forecast} currentTemp={weather.temperature} />
