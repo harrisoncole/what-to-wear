@@ -8,12 +8,6 @@ const passport = require('passport')
 const PORT = process.env.PORT || 8081
 const app = express()
 const socketio = require('socket.io')
-const https = require('https')
-
-const certOptions = {
-  key: fs.readFileSync(path.resolve('./server.key')),
-  cert: fs.readFileSync(path.resolve('./server.crt'))
-}
 
 module.exports = app
 
