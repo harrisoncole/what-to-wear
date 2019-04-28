@@ -15,12 +15,6 @@ const Container = ({
 }) => {
   return (
     <div className="home-container">
-      <h1 className="title">
-        <span>
-          What to Wear <i class="fas fa-globe-americas" />{' '}
-        </span>
-        <span id="tm">powered by Dark Sky</span>
-      </h1>
       <div className="home-container-inner">
         <h3>Hello Naked Person.</h3>
         {!forecast.currently ? (

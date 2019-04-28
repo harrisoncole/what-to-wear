@@ -1,13 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import CreateIcon from './CreateIcon'
-import Weather from './Weather'
-import Forecast from './Forecast'
-import Location from './Location'
 import Container from './Container'
 import moment from 'moment'
-import Form from './Form'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Hourly from './Hourly'
 import User from './User'
 
@@ -81,7 +76,7 @@ const Main = () => {
     <Switch>
       <Route
         exact
-        path="/"
+        path="/current"
         component={() => (
           <Container
             forecast={forecast}
@@ -96,6 +91,7 @@ const Main = () => {
       />
       <Route exact path="/hourly" component={Hourly} />
       <Route exact path="/user" component={User} />
+      <Redirect from="/" to="/current" />
     </Switch>
   )
 }

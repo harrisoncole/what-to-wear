@@ -99,15 +99,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_Main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Main */ "./client/components/Main.js");
 /* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Navbar */ "./client/components/Navbar.js");
+/* harmony import */ var _components_Banner__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Banner */ "./client/components/Banner.js");
+
 
 
  // import Routes from './routes'
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Main__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Banner__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Main__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./client/components/Banner.js":
+/*!*************************************!*\
+  !*** ./client/components/Banner.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Banner = function Banner() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "title"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "What to Wear ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    "class": "fas fa-globe-americas"
+  }), ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    id: "tm"
+  }, "powered by Dark Sky"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Banner);
 
 /***/ }),
 
@@ -142,13 +171,7 @@ var Container = function Container(_ref) {
       address = _ref.address;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "title"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "What to Wear ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    "class": "fas fa-globe-americas"
-  }), ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    id: "tm"
-  }, "powered by Dark Sky")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home-container-inner"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello Naked Person."), !forecast.currently ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " I'm thinking, okay?") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Weather__WEBPACK_IMPORTED_MODULE_2__["default"], {
     weather: forecast,
@@ -445,18 +468,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _CreateIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateIcon */ "./client/components/CreateIcon.js");
-/* harmony import */ var _Weather__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Weather */ "./client/components/Weather.js");
-/* harmony import */ var _Forecast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Forecast */ "./client/components/Forecast.js");
-/* harmony import */ var _Location__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Location */ "./client/components/Location.js");
-/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Container */ "./client/components/Container.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Form */ "./client/components/Form.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Hourly__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Hourly */ "./client/components/Hourly.js");
-/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./User */ "./client/components/User.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../utils */ "./client/utils.js");
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Container */ "./client/components/Container.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Hourly__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Hourly */ "./client/components/Hourly.js");
+/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./User */ "./client/components/User.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils */ "./client/utils.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -468,11 +486,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
 
 
 
@@ -524,12 +537,12 @@ var Main = function Main() {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                window.localStorage.setItem('time', JSON.stringify(moment__WEBPACK_IMPORTED_MODULE_7___default()()));
+                window.localStorage.setItem('time', JSON.stringify(moment__WEBPACK_IMPORTED_MODULE_3___default()()));
                 _context.next = 3;
                 return navigator.geolocation.getCurrentPosition(function (pos) {
                   var current = pos.coords.latitude + '_' + pos.coords.longitude;
 
-                  if (Math.floor(Number(Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLatitude"])())) !== Math.floor(pos.coords.latitude) || Math.floor(Number(Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLongitude"])())) !== Math.floor(pos.coords.longitude)) {
+                  if (Math.floor(Number(Object(_utils__WEBPACK_IMPORTED_MODULE_7__["getLatitude"])())) !== Math.floor(pos.coords.latitude) || Math.floor(Number(Object(_utils__WEBPACK_IMPORTED_MODULE_7__["getLongitude"])())) !== Math.floor(pos.coords.longitude)) {
                     window.localStorage.setItem('lat', pos.coords.latitude.toString());
                     window.localStorage.setItem('long', pos.coords.longitude.toString());
                     setCoords(current);
@@ -546,15 +559,15 @@ var Main = function Main() {
       return _getCoords.apply(this, arguments);
     }
 
-    if (Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLatitude"])() && Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLongitude"])()) {
-      var now = moment__WEBPACK_IMPORTED_MODULE_7___default()();
-      var then = Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getTime"])();
+    if (Object(_utils__WEBPACK_IMPORTED_MODULE_7__["getLatitude"])() && Object(_utils__WEBPACK_IMPORTED_MODULE_7__["getLongitude"])()) {
+      var now = moment__WEBPACK_IMPORTED_MODULE_3___default()();
+      var then = Object(_utils__WEBPACK_IMPORTED_MODULE_7__["getTime"])();
 
-      if (Object(_utils__WEBPACK_IMPORTED_MODULE_12__["compareTime"])(now, then) > 10) {
-        setCoords(Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLatitude"])() + '_' + Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLongitude"])());
+      if (Object(_utils__WEBPACK_IMPORTED_MODULE_7__["compareTime"])(now, then) > 10) {
+        setCoords(Object(_utils__WEBPACK_IMPORTED_MODULE_7__["getLatitude"])() + '_' + Object(_utils__WEBPACK_IMPORTED_MODULE_7__["getLongitude"])());
         getCoords();
       } else if (coords.length === 0) {
-        setCoords(Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLatitude"])() + '_' + Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLongitude"])());
+        setCoords(Object(_utils__WEBPACK_IMPORTED_MODULE_7__["getLatitude"])() + '_' + Object(_utils__WEBPACK_IMPORTED_MODULE_7__["getLongitude"])());
       }
     } else {
       getCoords();
@@ -605,11 +618,11 @@ var Main = function Main() {
       setDisplayButton(true);
     });
   }, []);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
     exact: true,
-    path: "/",
+    path: "/current",
     component: function component() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Container__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Container__WEBPACK_IMPORTED_MODULE_2__["default"], {
         forecast: forecast,
         address: address,
         coords: coords,
@@ -619,14 +632,17 @@ var Main = function Main() {
         setDisplayButton: setDisplayButton
       });
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
     exact: true,
     path: "/hourly",
-    component: _Hourly__WEBPACK_IMPORTED_MODULE_10__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
+    component: _Hourly__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
     exact: true,
     path: "/user",
-    component: _User__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _User__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Redirect"], {
+    from: "/",
+    to: "/current"
   }));
 };
 
@@ -654,7 +670,7 @@ var Navbar = function Navbar() {
     className: "navbar"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     className: "link",
-    to: "/",
+    to: "/current",
     activeClassName: "selected"
   }, "Current"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     to: "/hourly",
@@ -54873,7 +54889,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
