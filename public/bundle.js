@@ -444,13 +444,17 @@ var Hourly = function Hourly(_ref) {
       display = _useState2[0],
       setDisplay = _useState2[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      hourly = _useState4[0],
+      setHourly = _useState4[1];
+
   function changeEvent(evt) {
     setDisplay(event.target.value);
   }
 
-  var hourly;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    hourly = forecast.hourly && forecast.hourly.data.slice(0, display);
+    forecast.hourly && setHourly(forecast.hourly.data.slice(0, display));
   }, [display]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hourly-container"
@@ -469,7 +473,11 @@ var Hourly = function Hourly(_ref) {
     value: "16"
   }, "16"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
     value: "24"
-  }, "24"))));
+  }, "24"))), hourly && hourly.map(function (h) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      key: h.time
+    }, h.temperature);
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Hourly);

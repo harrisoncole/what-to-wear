@@ -2,15 +2,15 @@ import React, {useState, useEffect} from 'react'
 
 const Hourly = ({forecast}) => {
   const [display, setDisplay] = useState(8)
+  const [hourly, setHourly] = useState([])
 
   function changeEvent(evt) {
     setDisplay(event.target.value)
   }
-  let hourly
 
   useEffect(
     () => {
-      hourly = forecast.hourly && forecast.hourly.data.slice(0, display)
+      forecast.hourly && setHourly(forecast.hourly.data.slice(0, display))
     },
     [display]
   )
@@ -26,6 +26,8 @@ const Hourly = ({forecast}) => {
           <option value="24">24</option>
         </select>
       </div>
+
+      {hourly && hourly.map(h => <p key={h.time}>{h.temperature}</p>)}
     </div>
   )
 }
