@@ -3,6 +3,7 @@ import CreateIcon from './CreateIcon'
 import Weather from './Weather'
 import Forecast from './Forecast'
 import Form from './Form'
+import Icon from './Icon'
 
 const Container = ({
   forecast,
@@ -17,7 +18,10 @@ const Container = ({
   return (
     <div className="home-container">
       <div className="home-container-inner">
-        <h3>Hello Naked Person.</h3>
+        <h3>
+          Hello Naked Person{' '}
+          {forecast.hourly && <Icon icon={forecast.hourly.icon} />}
+        </h3>
         {!forecast.currently ? (
           <h2> I'm thinking, okay?</h2>
         ) : (

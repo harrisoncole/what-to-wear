@@ -6,7 +6,7 @@ const User = ({button, setButton}) => {
   }
 
   return (
-    <div>
+    <div className="profile-container">
       <h1>Set Profile Type: </h1>
       <form>
         <div className="profile-selector">

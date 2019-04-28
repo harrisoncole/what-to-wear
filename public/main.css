@@ -102,3 +102,18 @@ h1 {
 .big-rain {
   font-size: 10em;
 }
+
+.profile-container {
+  margin-left: 20px;
+}
+
+.hourly-container {
+  margin: 20px;
+}
+
+.hourly-hearder {
+  display: flex;
+}
+.hourly-header label {
+  margin: 0 20px;
+}

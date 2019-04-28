@@ -165,6 +165,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Weather__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Weather */ "./client/components/Weather.js");
 /* harmony import */ var _Forecast__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Forecast */ "./client/components/Forecast.js");
 /* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Form */ "./client/components/Form.js");
+/* harmony import */ var _Icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Icon */ "./client/components/Icon.js");
+
 
 
 
@@ -184,7 +186,9 @@ var Container = function Container(_ref) {
     className: "home-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home-container-inner"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello Naked Person."), !forecast.currently ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " I'm thinking, okay?") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Weather__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello Naked Person", ' ', forecast.hourly && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Icon__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    icon: forecast.hourly.icon
+  })), !forecast.currently ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " I'm thinking, okay?") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Weather__WEBPACK_IMPORTED_MODULE_2__["default"], {
     weather: forecast,
     address: address,
     coords: coords
@@ -422,13 +426,132 @@ function _formSubmission() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-var Hourly = function Hourly() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hourly page goes here");
+
+var Hourly = function Hourly(_ref) {
+  var forecast = _ref.forecast;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(8),
+      _useState2 = _slicedToArray(_useState, 2),
+      display = _useState2[0],
+      setDisplay = _useState2[1];
+
+  function changeEvent(evt) {
+    setDisplay(event.target.value);
+  }
+
+  var hourly;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    hourly = forecast.hourly && forecast.hourly.data.slice(0, display);
+  }, [display]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hourly-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hourly-header"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hourly forecast"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: "hours"
+  }, "hours displayed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    onChange: function onChange(evt) {
+      return changeEvent(evt);
+    },
+    name: "hours"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: "8"
+  }, "8"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: "16"
+  }, "16"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: "24"
+  }, "24"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Hourly);
+
+/***/ }),
+
+/***/ "./client/components/Icon.js":
+/*!***********************************!*\
+  !*** ./client/components/Icon.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* eslint-disable complexity */
+
+
+var Icon = function Icon(_ref) {
+  var icon = _ref.icon;
+
+  switch (icon) {
+    case 'clear-day':
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-sun"
+      });
+
+    case 'clear-night':
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "far fa-moon"
+      });
+
+    case 'rain':
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-cloud-showers-heavy"
+      });
+
+    case 'snow':
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-snowflake"
+      });
+
+    case 'wind':
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-wind"
+      });
+
+    case 'fog':
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-cloud"
+      });
+
+    case 'cloudy':
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-cloud"
+      });
+
+    case 'partly-cloudy-day':
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-cloud-sun"
+      });
+
+    case 'partly-cloudy-night':
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-cloud-moon"
+      });
+
+    case 'sleet':
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-meteor"
+      });
+
+    default:
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-cloud-sun"
+      });
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Icon);
 
 /***/ }),
 
@@ -781,7 +904,9 @@ var User = function User(_ref) {
     setButton(event.target.value);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Set Profile Type: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Set Profile Type: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "profile-selector"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "radio",
@@ -55018,7 +55143,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
