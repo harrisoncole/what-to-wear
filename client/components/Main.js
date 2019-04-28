@@ -106,7 +106,11 @@ const Main = () => {
           />
         )}
       />
-      <Route exact path="/hourly" component={Hourly} />
+      <Route
+        exact
+        path="/hourly"
+        component={() => <Hourly forecast={forecast} />}
+      />
       <Route
         exact
         path="/user"

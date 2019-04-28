@@ -1,7 +1,7 @@
-let cacheName = 'cache-v6'
+let cacheName = 'cache-v12'
 const resourcesToPrecache = [
   'offline.html',
-  'style.css',
+  'main.css',
   'https://use.fontawesome.com/releases/v5.8.1/css/all.css'
 ]
 

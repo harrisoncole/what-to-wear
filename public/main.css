@@ -8,6 +8,11 @@ h1 {
   margin-bottom: 0;
 }
 
+#logo {
+  text-decoration: none;
+  color: black;
+}
+
 #temp {
   font-weight: bold;
   font-size: 30px;
@@ -87,6 +92,13 @@ h1 {
   margin-left: 10px;
 }
 
+.zip-search {
+  margin-top: 40px;
+}
 .zip-search input {
   margin: 0 10px;
+}
+
+.big-rain {
+  font-size: 10em;
 }
