@@ -81,18 +81,7 @@ const createApp = () => {
 }
 
 const startListening = () => {
-  // start listening (and create a 'server' object representing our server)
-  let server
-  // if (process.env.NODE_ENV === 'development') {
-  //   server = https.createServer(certOptions, app).listen(PORT)
-  //   console.log(`Secure cloud cover on port ${PORT}`)
-  // } else {
-  //   server = app.listen(PORT, () => {
-  //     console.log(`Cloud cover on port ${PORT}`)
-  //   })
-  // }
-
-  server = app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log('Cloud cover on port ', PORT)
   })
   // set up our socket control center
