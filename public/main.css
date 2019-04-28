@@ -4,7 +4,7 @@
 
 h1 {
   font-size: 15px;
-  border: 0.5px solid #05668d;
+  border-bottom: 0.5px solid #05668d;
   padding: 10px;
   margin-bottom: 0;
 }
@@ -49,4 +49,27 @@ h1 {
   margin-bottom: 2px;
   padding-bottom: 0;
   text-align: left;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 0.5px solid #05668d;
+  margin: 20px;
+  padding-right: 20px;
+  width: 450px;
+  height: 25px;
+}
+
+.navbar .link {
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.selected {
+  border-bottom: 0.5px solid #05668d;
 }

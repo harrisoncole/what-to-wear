@@ -5,9 +5,9 @@ const Wardrobe = ({
   high,
   low,
   precipProb,
-  precipType,
   uvIndex,
-  currentTemp
+  currentTemp,
+  precipType
 }) => {
   if (currentTemp > low) {
     low = currentTemp

@@ -10,6 +10,7 @@ import Wardrobe from './Wardrobe'
 
 const Forecast = ({forecast, currentTemp}) => {
   const hourlyArr = forecast.hourly.data.slice(0, 8)
+  const precipType = forecast.daily.data[0].precipType
 
   const [maxRainTime, maxRain] = maxMetric(hourlyArr, 'precipIntensity')
   const [highTime, high] = maxMetric(hourlyArr, 'temperature')
@@ -19,7 +20,15 @@ const Forecast = ({forecast, currentTemp}) => {
   const humidity = avgXHrPctMetric(hourlyArr, 8, 'humidity')
   const [indexTime, uvIndex] = maxMetric(hourlyArr, 'uvIndex')
   const cloudCover = avgXHrPctMetric(hourlyArr, 8, 'cloudCover')
-  const props = {high, low, cloudCover, currentTemp}
+  const props = {
+    high,
+    low,
+    cloudCover,
+    currentTemp,
+    precipProb,
+    uvIndex,
+    precipType
+  }
   return (
     <div>
       {low === 'NaN' ? (
