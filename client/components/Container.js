@@ -11,7 +11,8 @@ const Container = ({
   setDisplayButton,
   setAddress,
   coords,
-  address
+  address,
+  profile
 }) => {
   return (
     <div className="home-container">
@@ -25,6 +26,7 @@ const Container = ({
             <Forecast
               forecast={forecast}
               currentTemp={forecast.currently.temperature}
+              profile={profile}
             />
             <Form setForecast={setForecast} setAddress={setAddress} />
           </div>

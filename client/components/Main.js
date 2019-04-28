@@ -15,8 +15,22 @@ const Main = () => {
   const [displayButton, setDisplayButton] = useState(false)
   const [prompt, setPrompt] = useState({})
   const [address, setAddress] = useState('')
+  const [button, setButton] = useState('avg')
+  const [profile, setProfile] = useState({})
 
   //EFFECTS
+  useEffect(
+    () => {
+      async function getProfileInfo(type) {
+        const {data} = await axios.get(`/api/users/${type}`)
+        setProfile(data)
+      }
+
+      getProfileInfo(button)
+    },
+    [button]
+  )
+
   useEffect(() => {
     async function getCoords() {
       window.localStorage.setItem('time', JSON.stringify(moment()))
@@ -86,11 +100,16 @@ const Main = () => {
             setAddress={setAddress}
             displayButton={displayButton}
             setDisplayButton={setDisplayButton}
+            profile={profile}
           />
         )}
       />
       <Route exact path="/hourly" component={Hourly} />
-      <Route exact path="/user" component={User} />
+      <Route
+        exact
+        path="/user"
+        component={() => <User button={button} setButton={setButton} />}
+      />
       <Redirect from="/" to="/current" />
     </Switch>
   )

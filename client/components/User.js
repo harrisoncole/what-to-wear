@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React from 'react'
 
-const User = () => {
-  const [button, setButton] = useState('avg')
-
-  const handleChange = evt => setButton(event.target.value)
+const User = ({button, setButton}) => {
+  const handleChange = evt => {
+    setButton(event.target.value)
+  }
 
   return (
     <div>

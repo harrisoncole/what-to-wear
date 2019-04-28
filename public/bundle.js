@@ -168,7 +168,8 @@ var Container = function Container(_ref) {
       setDisplayButton = _ref.setDisplayButton,
       setAddress = _ref.setAddress,
       coords = _ref.coords,
-      address = _ref.address;
+      address = _ref.address,
+      profile = _ref.profile;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -179,7 +180,8 @@ var Container = function Container(_ref) {
     coords: coords
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Forecast__WEBPACK_IMPORTED_MODULE_3__["default"], {
     forecast: forecast,
-    currentTemp: forecast.currently.temperature
+    currentTemp: forecast.currently.temperature,
+    profile: profile
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Form__WEBPACK_IMPORTED_MODULE_4__["default"], {
     setForecast: setForecast,
     setAddress: setAddress
@@ -258,7 +260,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Forecast = function Forecast(_ref) {
   var forecast = _ref.forecast,
-      currentTemp = _ref.currentTemp;
+      currentTemp = _ref.currentTemp,
+      profile = _ref.profile;
   var hourlyArr = forecast.hourly.data.slice(0, 8);
   var precipType = forecast.daily.data[0].precipType;
 
@@ -293,9 +296,10 @@ var Forecast = function Forecast(_ref) {
     currentTemp: currentTemp,
     precipProb: precipProb,
     uvIndex: uvIndex,
-    precipType: precipType
+    precipType: precipType,
+    profile: profile
   };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, low === 'NaN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Wardrobe__WEBPACK_IMPORTED_MODULE_2__["default"], props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Today's forecast has a low of ", Math.floor(low), "\xB0 at ", lowTime, ", a high of ", Math.ceil(high), "\xB0 at ", highTime, ". There's a ", precipProb, "% average chance of precipitation.", ' ', maxRain > 0.1 && "The most intense precipitation is forecast for ".concat(maxRainTime, ". "), "Humidity will be ", humidity, "% and there's a UV Index of ", uvIndex, ". There will be an average of ", cloudCover, "% cloud cover.")));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, low === 'NaN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Wardrobe__WEBPACK_IMPORTED_MODULE_2__["default"], props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Today's forecast has a low of ", Math.floor(low), "\xB0 at ", lowTime, ", a high of ", Math.ceil(high), "\xB0 at ", highTime, ". There's a ", precipProb, "% average chance of precipitation.", ' ', maxRain > 0.1 && "The most intense precipitation is forecast for ".concat(maxRainTime, ". "), "Humidity will be ", humidity, "% and there's a UV Index of ", uvIndex, ". There will be an average of ", cloudCover, "% cloud cover. The offset is", ' ', profile.offset, ".")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Forecast);
@@ -521,9 +525,54 @@ var Main = function Main() {
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState10 = _slicedToArray(_useState9, 2),
       address = _useState10[0],
-      setAddress = _useState10[1]; //EFFECTS
+      setAddress = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('avg'),
+      _useState12 = _slicedToArray(_useState11, 2),
+      button = _useState12[0],
+      setButton = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState14 = _slicedToArray(_useState13, 2),
+      profile = _useState14[0],
+      setProfile = _useState14[1]; //EFFECTS
 
 
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    function getProfileInfo(_x) {
+      return _getProfileInfo.apply(this, arguments);
+    }
+
+    function _getProfileInfo() {
+      _getProfileInfo = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(type) {
+        var _ref, data;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/users/".concat(type));
+
+              case 2:
+                _ref = _context.sent;
+                data = _ref.data;
+                setProfile(data);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+      return _getProfileInfo.apply(this, arguments);
+    }
+
+    getProfileInfo(button);
+  }, [button]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     function getCoords() {
       return _getCoords.apply(this, arguments);
@@ -532,13 +581,13 @@ var Main = function Main() {
     function _getCoords() {
       _getCoords = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+      regeneratorRuntime.mark(function _callee2() {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 window.localStorage.setItem('time', JSON.stringify(moment__WEBPACK_IMPORTED_MODULE_3___default()()));
-                _context.next = 3;
+                _context2.next = 3;
                 return navigator.geolocation.getCurrentPosition(function (pos) {
                   var current = pos.coords.latitude + '_' + pos.coords.longitude;
 
@@ -551,10 +600,10 @@ var Main = function Main() {
 
               case 3:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }));
       return _getCoords.apply(this, arguments);
     }
@@ -574,35 +623,35 @@ var Main = function Main() {
     }
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    function getCurrentWeather(_x) {
+    function getCurrentWeather(_x2) {
       return _getCurrentWeather.apply(this, arguments);
     }
 
     function _getCurrentWeather() {
       _getCurrentWeather = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(coordStr) {
-        var _ref, data;
+      regeneratorRuntime.mark(function _callee3(coordStr) {
+        var _ref2, data;
 
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.next = 2;
+                _context3.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/weather/".concat(coordStr, "/forecast"));
 
               case 2:
-                _ref = _context2.sent;
-                data = _ref.data;
+                _ref2 = _context3.sent;
+                data = _ref2.data;
                 setForecast(data.forecast);
                 setAddress(data.address);
 
               case 6:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }));
       return _getCurrentWeather.apply(this, arguments);
     }
@@ -629,7 +678,8 @@ var Main = function Main() {
         setForecast: setForecast,
         setAddress: setAddress,
         displayButton: displayButton,
-        setDisplayButton: setDisplayButton
+        setDisplayButton: setDisplayButton,
+        profile: profile
       });
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
@@ -639,7 +689,12 @@ var Main = function Main() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
     exact: true,
     path: "/user",
-    component: _User__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: function component() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_User__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        button: button,
+        setButton: setButton
+      });
+    }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Redirect"], {
     from: "/",
     to: "/current"
@@ -698,24 +753,14 @@ var Navbar = function Navbar() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-
-var User = function User() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('avg'),
-      _useState2 = _slicedToArray(_useState, 2),
-      button = _useState2[0],
-      setButton = _useState2[1];
+var User = function User(_ref) {
+  var button = _ref.button,
+      setButton = _ref.setButton;
 
   var handleChange = function handleChange(evt) {
-    return setButton(event.target.value);
+    setButton(event.target.value);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Set Profile Type: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

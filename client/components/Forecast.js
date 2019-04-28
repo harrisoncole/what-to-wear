@@ -1,14 +1,8 @@
 import React from 'react'
-import {
-  unixToTime,
-  nextXHrs,
-  maxMetric,
-  minMetric,
-  avgXHrPctMetric
-} from '../utils'
+import {maxMetric, minMetric, avgXHrPctMetric} from '../utils'
 import Wardrobe from './Wardrobe'
 
-const Forecast = ({forecast, currentTemp}) => {
+const Forecast = ({forecast, currentTemp, profile}) => {
   const hourlyArr = forecast.hourly.data.slice(0, 8)
   const precipType = forecast.daily.data[0].precipType
 
@@ -27,7 +21,8 @@ const Forecast = ({forecast, currentTemp}) => {
     currentTemp,
     precipProb,
     uvIndex,
-    precipType
+    precipType,
+    profile
   }
   return (
     <div>
@@ -43,7 +38,8 @@ const Forecast = ({forecast, currentTemp}) => {
             {maxRain > 0.1 &&
               `The most intense precipitation is forecast for ${maxRainTime}. `}Humidity
             will be {humidity}% and there's a UV Index of {uvIndex}. There will
-            be an average of {cloudCover}% cloud cover.
+            be an average of {cloudCover}% cloud cover. The offset is{' '}
+            {profile.offset}.
           </p>
         </div>
       )}
