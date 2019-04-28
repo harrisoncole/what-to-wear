@@ -252,7 +252,7 @@ var Form = function Form(_ref) {
   var setForecast = _ref.setForecast,
       setAddress = _ref.setAddress;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(10025),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(11803),
       _useState2 = _slicedToArray(_useState, 2),
       zipCode = _useState2[0],
       setZipcode = _useState2[1];
@@ -264,6 +264,7 @@ var Form = function Form(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: "zip"
   }, "Enter another zip code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    id: "zip",
     type: "text",
     name: "zip",
     onChange: function onChange(e) {
@@ -297,8 +298,9 @@ function _formSubmission() {
             data = _ref2.data;
             setForecast(data.forecast);
             setAddress(data.address);
+            document.getElementById('zip').value = '';
 
-          case 7:
+          case 8:
           case "end":
             return _context.stop();
         }
