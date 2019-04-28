@@ -9,12 +9,14 @@ import Form from './Form'
 import {getLatitude, getLongitude, getTime, compareTime} from '../utils'
 
 const Main = () => {
+  //STATE
   const [forecast, setForecast] = useState({})
   const [coords, setCoords] = useState('')
   const [displayButton, setDisplayButton] = useState(false)
   const [prompt, setPrompt] = useState({})
   const [address, setAddress] = useState('')
 
+  //EFFECTS
   useEffect(() => {
     async function getCoords() {
       window.localStorage.setItem('time', JSON.stringify(moment()))
@@ -89,7 +91,7 @@ const Main = () => {
               forecast={forecast}
               currentTemp={forecast.currently.temperature}
             />
-            <Form />
+            <Form setForecast={setForecast} setAddress={setAddress} />
           </div>
         )}
 

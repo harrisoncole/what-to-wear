@@ -231,6 +231,8 @@ var Forecast = function Forecast(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -245,8 +247,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var Form = function Form(_ref) {
-  var _onSubmit = _ref.onSubmit;
+  var setForecast = _ref.setForecast,
+      setAddress = _ref.setAddress;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(10025),
       _useState2 = _slicedToArray(_useState, 2),
@@ -255,7 +259,7 @@ var Form = function Form(_ref) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: function onSubmit(evt) {
-      formSubmission(event, _onSubmit, zipCode);
+      formSubmission(evt, setForecast, setAddress, zipCode);
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: "zip"
@@ -270,23 +274,31 @@ var Form = function Form(_ref) {
   }, "Get that weather"));
 };
 
-function formSubmission(_x, _x2, _x3) {
+function formSubmission(_x, _x2, _x3, _x4) {
   return _formSubmission.apply(this, arguments);
 }
 
 function _formSubmission() {
   _formSubmission = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(event, onSubmit, zipCode) {
+  regeneratorRuntime.mark(function _callee(event, setForecast, setAddress, zipCode) {
+    var _ref2, data;
+
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             event.preventDefault();
             _context.next = 3;
-            return onSubmit(zipCode);
+            return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/weather/".concat(zipCode));
 
           case 3:
+            _ref2 = _context.sent;
+            data = _ref2.data;
+            setForecast(data.forecast);
+            setAddress(data.address);
+
+          case 7:
           case "end":
             return _context.stop();
         }
@@ -326,12 +338,12 @@ var Location = function Location(_ref) {
 
   var _address$split = address.split(', '),
       _address$split2 = _slicedToArray(_address$split, 4),
-      street = _address$split2[0],
-      city = _address$split2[1],
-      stateZip = _address$split2[2],
-      country = _address$split2[3];
+      streetOrCity = _address$split2[0],
+      cityOrStateZip = _address$split2[1],
+      stateZipOrCountry = _address$split2[2],
+      countryOrUndefined = _address$split2[3];
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, address.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, city, ", ", stateZip), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, address.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, countryOrUndefined ? "".concat(cityOrStateZip, ", ").concat(stateZipOrCountry) : "".concat(streetOrCity, ", ").concat(cityOrStateZip)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Location);
@@ -382,6 +394,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Main = function Main() {
+  //STATE
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
       _useState2 = _slicedToArray(_useState, 2),
       forecast = _useState2[0],
@@ -405,7 +418,8 @@ var Main = function Main() {
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState10 = _slicedToArray(_useState9, 2),
       address = _useState10[0],
-      setAddress = _useState10[1];
+      setAddress = _useState10[1]; //EFFECTS
+
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     function getCoords() {
@@ -518,7 +532,10 @@ var Main = function Main() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Forecast__WEBPACK_IMPORTED_MODULE_4__["default"], {
     forecast: forecast,
     currentTemp: forecast.currently.temperature
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Form__WEBPACK_IMPORTED_MODULE_7__["default"], null)), displayButton && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateIcon__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Form__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    setForecast: setForecast,
+    setAddress: setAddress
+  })), displayButton && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateIcon__WEBPACK_IMPORTED_MODULE_2__["default"], {
     prompt: prompt,
     setDisplayButton: setDisplayButton
   })));
@@ -54695,7 +54712,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

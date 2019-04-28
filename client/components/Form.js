@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
+import axios from 'axios'
 
-const Form = ({onSubmit}) => {
+const Form = ({setForecast, setAddress}) => {
   const [zipCode, setZipcode] = useState(10025)
   return (
     <form
       onSubmit={evt => {
-        formSubmission(event, onSubmit, zipCode)
+        formSubmission(evt, setForecast, setAddress, zipCode)
       }}
     >
       <label htmlFor="zip">Enter another zip code</label>
@@ -19,9 +20,11 @@ const Form = ({onSubmit}) => {
   )
 }
 
-async function formSubmission(event, onSubmit, zipCode) {
+async function formSubmission(event, setForecast, setAddress, zipCode) {
   event.preventDefault()
-  await onSubmit(zipCode)
+  const {data} = await axios.get(`/api/weather/${zipCode}`)
+  setForecast(data.forecast)
+  setAddress(data.address)
 }
 
 export default Form

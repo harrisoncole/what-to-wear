@@ -1,12 +1,19 @@
 import React from 'react'
 
 const Location = ({address}) => {
-  const [street, city, stateZip, country] = address.split(', ')
+  const [
+    streetOrCity,
+    cityOrStateZip,
+    stateZipOrCountry,
+    countryOrUndefined
+  ] = address.split(', ')
   return (
     <div>
       {address.length > 0 && (
         <span>
-          {city}, {stateZip}
+          {countryOrUndefined
+            ? `${cityOrStateZip}, ${stateZipOrCountry}`
+            : `${streetOrCity}, ${cityOrStateZip}`}
         </span>
       )}
       <br />
