@@ -426,6 +426,7 @@ function _formSubmission() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _HourlyCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HourlyCard */ "./client/components/HourlyCard.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -433,6 +434,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -474,13 +476,56 @@ var Hourly = function Hourly(_ref) {
   }, "16"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
     value: "24"
   }, "24"))), hourly && hourly.map(function (h) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      key: h.time
-    }, h.temperature);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HourlyCard__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      key: h.time,
+      icon: h.icon,
+      time: h.time,
+      temp: h.temperature,
+      uvi: h.uvIndex,
+      prob: h.precipProbability,
+      summary: h.summary,
+      precipIntensity: h.precipIntensity
+    });
   }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Hourly);
+
+/***/ }),
+
+/***/ "./client/components/HourlyCard.js":
+/*!*****************************************!*\
+  !*** ./client/components/HourlyCard.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ "./client/utils.js");
+/* harmony import */ var _Icon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Icon */ "./client/components/Icon.js");
+
+
+
+
+var HourlyCard = function HourlyCard(_ref) {
+  var icon = _ref.icon,
+      time = _ref.time,
+      temp = _ref.temp,
+      uvi = _ref.uvi,
+      prob = _ref.prob,
+      summary = _ref.summary,
+      precipIntensity = _ref.precipIntensity;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hourly-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Icon__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    icon: icon
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (HourlyCard);
 
 /***/ }),
 

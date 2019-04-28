@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import HourlyCard from './HourlyCard'
 
 const Hourly = ({forecast}) => {
   const [display, setDisplay] = useState(8)
@@ -27,7 +28,7 @@ const Hourly = ({forecast}) => {
         </select>
       </div>
 
-      {hourly && hourly.map(h => <p key={h.time}>{h.temperature}</p>)}
+      {hourly && hourly.map(h => <HourlyCard key={h.time} icon={h.icon} time={h.time} temp={h.temperature} uvi={h.uvIndex} prob={h.precipProbability} summary={h.summary} precipIntensity={h.precipIntensity} />)}
     </div>
   )
 }
