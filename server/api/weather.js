@@ -23,11 +23,24 @@ zipNotFound.status = 404
 
 router.get('/:zip', async (req, res, next) => {
   try {
+    let zip = req.params.zip
     const {data} = await axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${GOOGLE_MAPS_KEY}`
+      `https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${zip}&key=${GOOGLE_MAPS_KEY}`
     )
 
-    res.json({weather: weatherObj, address: data.results[0].formatted_address})
+    if (data.status !== 'OK') {
+      next(zipNotFound)
+    } else {
+      const coords = data.results[0].geometry.location
+      const weatherObj = await DarkSkyApi.loadItAll('minutely', {
+        latitude: coords.lat,
+        longitude: coords.lng
+      })
+      res.json({
+        forecast: weatherObj,
+        address: data.results[0].formatted_address
+      })
+    }
   } catch (error) {
     next(error)
   }
