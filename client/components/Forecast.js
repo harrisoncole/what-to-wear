@@ -38,8 +38,7 @@ const Forecast = ({forecast, currentTemp, profile}) => {
             {maxRain > 0.1 &&
               `The most intense precipitation is forecast for ${maxRainTime}. `}Humidity
             will be {humidity}% and there's a UV Index of {uvIndex}. There will
-            be an average of {cloudCover}% cloud cover. The offset is{' '}
-            {profile.offset}.
+            be an average of {cloudCover}% cloud cover.
           </p>
         </div>
       )}

@@ -299,7 +299,7 @@ var Forecast = function Forecast(_ref) {
     precipType: precipType,
     profile: profile
   };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, low === 'NaN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Wardrobe__WEBPACK_IMPORTED_MODULE_2__["default"], props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Today's forecast has a low of ", Math.floor(low), "\xB0 at ", lowTime, ", a high of ", Math.ceil(high), "\xB0 at ", highTime, ". There's a ", precipProb, "% average chance of precipitation.", ' ', maxRain > 0.1 && "The most intense precipitation is forecast for ".concat(maxRainTime, ". "), "Humidity will be ", humidity, "% and there's a UV Index of ", uvIndex, ". There will be an average of ", cloudCover, "% cloud cover. The offset is", ' ', profile.offset, ".")));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, low === 'NaN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Wardrobe__WEBPACK_IMPORTED_MODULE_2__["default"], props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Today's forecast has a low of ", Math.floor(low), "\xB0 at ", lowTime, ", a high of ", Math.ceil(high), "\xB0 at ", highTime, ". There's a ", precipProb, "% average chance of precipitation.", ' ', maxRain > 0.1 && "The most intense precipitation is forecast for ".concat(maxRainTime, ". "), "Humidity will be ", humidity, "% and there's a UV Index of ", uvIndex, ". There will be an average of ", cloudCover, "% cloud cover.")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Forecast);
@@ -824,32 +824,34 @@ var Wardrobe = function Wardrobe(_ref) {
       precipProb = _ref.precipProb,
       uvIndex = _ref.uvIndex,
       currentTemp = _ref.currentTemp,
-      precipType = _ref.precipType;
+      precipType = _ref.precipType,
+      profile = _ref.profile;
 
   if (currentTemp > low) {
     low = currentTemp;
   }
 
+  var offset = profile.offset ? profile.offset : 0;
   var umbrella = precipProb > 15 && precipType !== 'snow';
   var jacket = false;
   var sungear = uvIndex > 5.9;
 
-  if (high < 32) {
+  if (high < 32 - offset) {
     jacket = 'parka';
     umbrella = false;
-  } else if (high < 40) {
+  } else if (high < 40 - offset) {
     jacket = 'winter coat';
-  } else if (high < 50) {
+  } else if (high < 50 - offset) {
     jacket = 'midweight jacket';
-  } else if (high < 60) {
+  } else if (high < 60 - offset) {
     jacket = 'light jacket';
-  } else if (high < 65) {
+  } else if (high < 65 - offset) {
     jacket = 'sweater or very light jacket';
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "clothing-recs"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Here are my thoughts on clothes: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, umbrella && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " Bring an umbrella! "), jacket ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " You'll want a ", jacket, " for this weather. ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " No need for a jacket today! "), sungear && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, ' ', "There's a high UV index today, so wear sunscreen or bring a hat!", ' ')));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Here are my thoughts on clothes: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, umbrella && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " Bring an umbrella! "), jacket ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " You'll want a ", jacket, " for this weather. ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " No need for a jacket today! "), sungear && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, ' ', "There's a high UV index today, so wear sunscreen or bring a hat!", ' '), profile.clothing === 'shorts' && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "You'll probably want to wear shorts too, because that's your kind of thing.")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Wardrobe);
