@@ -27,11 +27,9 @@ h1 {
   display: flex;
   border-bottom: 0.5px solid #05668d;
   justify-content: space-between;
-  width: 450px;
 }
 
 .home-container {
-  width: 450px;
   margin: 20px;
   padding-right: 20px;
   text-align: center;
@@ -60,8 +58,11 @@ h1 {
   border-top: 0.5px solid #05668d;
   margin: 20px;
   padding-right: 20px;
-  width: 450px;
   height: 25px;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  width: 100%;
 }
 
 .navbar .link {
@@ -84,4 +85,8 @@ h1 {
 
 .profile-selector label {
   margin-left: 10px;
+}
+
+.zip-search input {
+  margin: 0 10px;
 }

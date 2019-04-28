@@ -65,3 +65,35 @@ export function minMetric(dailyArr, metric) {
 
   return [unixToTime(grandMin.time), grandMin[metric]]
 }
+
+///set up service worker and push notifications
+
+const publicVapidKey =
+  'BJDGORYvRrDZRpFnb6rD9wGSblHu7FHN_s4q5GBdO0LUxsqu4NfnLXIEqvgFOWCSkiVcwN4LxvOV-1bIsFbbv7Y'
+
+export async function registerSW() {
+  const register = await navigator.serviceWorker.register('/sw.js')
+  const subscription = await register.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+  })
+  await fetch('/subscribe', {
+    method: 'POST',
+    body: JSON.stringify(subscription),
+    headers: {'content-type': 'application/json'}
+  })
+}
+
+//from web-push docs:
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4)
+  const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/')
+
+  const rawData = window.atob(base64)
+  const outputArray = new Uint8Array(rawData.length)
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i)
+  }
+  return outputArray
+}

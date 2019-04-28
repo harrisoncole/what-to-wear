@@ -5,6 +5,7 @@ const Form = ({setForecast, setAddress}) => {
   const [zipCode, setZipcode] = useState(11803)
   return (
     <form
+      className="zip-search"
       onSubmit={evt => {
         formSubmission(evt, setForecast, setAddress, zipCode)
       }}

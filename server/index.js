@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const express = require('express')
 const morgan = require('morgan')
+const webpush = require('web-push')
 const compression = require('compression')
 // const session = require('express-session')
 const passport = require('passport')
@@ -10,6 +11,16 @@ const app = express()
 const socketio = require('socket.io')
 const db = require('./db/cloudFirestoreInit')
 module.exports = app
+
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config()
+}
+
+webpush.setVapidDetails(
+  'mailto: test@test.com',
+  process.env.PUBLIC_VAPID_KEY,
+  process.env.PRIVATE_VAPID_KEY
+)
 
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
@@ -52,6 +63,20 @@ const createApp = () => {
   // auth and api routes
   // app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
+
+  //push notification
+  app.post('/subscribe', (req, res, next) => {
+    //get push subscription object
+    const subscription = req.body
+
+    res.status(201).json({})
+
+    //create payload
+    const payload = JSON.stringify({title: 'Thanks for checking the weather!'})
+
+    //Pass object into sendNotification
+    webpush.sendNotification(subscription, payload).catch(e => next(e))
+  })
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))

@@ -90,20 +90,25 @@
 /*!***********************!*\
   !*** ./client/app.js ***!
   \***********************/
-/*! exports provided: default */
+/*! exports provided: pushSubscription, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pushSubscription", function() { return pushSubscription; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_Main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Main */ "./client/components/Main.js");
 /* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Navbar */ "./client/components/Navbar.js");
 /* harmony import */ var _components_Banner__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Banner */ "./client/components/Banner.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils */ "./client/utils.js");
+
 
 
 
  // import Routes from './routes'
+
+var pushSubscription = Object(_utils__WEBPACK_IMPORTED_MODULE_4__["registerSW"])();
 
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Banner__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Main__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], null));
@@ -344,6 +349,7 @@ var Form = function Form(_ref) {
       setZipcode = _useState2[1];
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "zip-search",
     onSubmit: function onSubmit(evt) {
       formSubmission(evt, setForecast, setAddress, zipCode);
     }
@@ -479,6 +485,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Hourly__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Hourly */ "./client/components/Hourly.js");
 /* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./User */ "./client/components/User.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils */ "./client/utils.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../app */ "./client/app.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -490,6 +497,8 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -943,7 +952,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*!*************************!*\
   !*** ./client/utils.js ***!
   \*************************/
-/*! exports provided: unixToTime, getLatitude, getLongitude, getTime, compareTime, avgXHrPctMetric, roundedPercent, nextXHrs, maxMetric, minMetric */
+/*! exports provided: unixToTime, getLatitude, getLongitude, getTime, compareTime, avgXHrPctMetric, roundedPercent, nextXHrs, maxMetric, minMetric, registerSW */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -958,8 +967,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nextXHrs", function() { return nextXHrs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "maxMetric", function() { return maxMetric; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "minMetric", function() { return minMetric; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerSW", function() { return registerSW; });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -1010,6 +1024,65 @@ function minMetric(dailyArr, metric) {
     return min[metric] > current[metric] ? current : min;
   }, _defineProperty({}, metric, 200));
   return [unixToTime(grandMin.time), grandMin[metric]];
+} ///set up service worker and push notifications
+
+var publicVapidKey = 'BJDGORYvRrDZRpFnb6rD9wGSblHu7FHN_s4q5GBdO0LUxsqu4NfnLXIEqvgFOWCSkiVcwN4LxvOV-1bIsFbbv7Y';
+function registerSW() {
+  return _registerSW.apply(this, arguments);
+} //from web-push docs:
+
+function _registerSW() {
+  _registerSW = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee() {
+    var register, subscription;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return navigator.serviceWorker.register('/sw.js');
+
+          case 2:
+            register = _context.sent;
+            _context.next = 5;
+            return register.pushManager.subscribe({
+              userVisibleOnly: true,
+              applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+            });
+
+          case 5:
+            subscription = _context.sent;
+            _context.next = 8;
+            return fetch('/subscribe', {
+              method: 'POST',
+              body: JSON.stringify(subscription),
+              headers: {
+                'content-type': 'application/json'
+              }
+            });
+
+          case 8:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _registerSW.apply(this, arguments);
+}
+
+function urlBase64ToUint8Array(base64String) {
+  var padding = '='.repeat((4 - base64String.length % 4) % 4);
+  var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+  var rawData = window.atob(base64);
+  var outputArray = new Uint8Array(rawData.length);
+
+  for (var i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+
+  return outputArray;
 }
 
 /***/ }),
@@ -54936,7 +55009,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
