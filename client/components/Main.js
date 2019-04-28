@@ -5,6 +5,7 @@ import Weather from './Weather'
 import Forecast from './Forecast'
 import Location from './Location'
 import moment from 'moment'
+import Form from './Form'
 import {getLatitude, getLongitude, getTime, compareTime} from '../utils'
 
 const Main = () => {
@@ -38,7 +39,7 @@ const Main = () => {
       if (compareTime(now, then) > 10) {
         setCoords(getLatitude() + '_' + getLongitude())
         getCoords()
-      } else {
+      } else if (coords.length === 0) {
         setCoords(getLatitude() + '_' + getLongitude())
       }
     } else {
@@ -88,6 +89,7 @@ const Main = () => {
               forecast={forecast}
               currentTemp={forecast.currently.temperature}
             />
+            <Form />
           </div>
         )}
 

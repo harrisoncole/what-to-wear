@@ -1,31 +1,27 @@
 import React, {useState} from 'react'
-import {getCurrentWeather} from '../utils'
 
-const Form = ({setWeather}) => {
+const Form = ({onSubmit}) => {
   const [zipCode, setZipcode] = useState(10025)
   return (
     <form
       onSubmit={evt => {
-        formSubmission(evt, setWeather, zipCode)
+        formSubmission(event, onSubmit, zipCode)
       }}
     >
-      <label htmlFor="zip">Enter zip code</label>
+      <label htmlFor="zip">Enter another zip code</label>
       <input
         type="text"
         name="zip"
         onChange={e => setZipcode(e.target.value)}
       />
-      <button type="submit">tell me something good</button>
+      <button type="submit">Get that weather</button>
     </form>
   )
 }
 
-async function formSubmission(event, setter, zipCode) {
+async function formSubmission(event, onSubmit, zipCode) {
   event.preventDefault()
-  console.log('form submisson:')
-  const current = await getCurrentWeather(zipCode)
-  console.log('got weather:', current)
-  setter(current)
+  await onSubmit(zipCode)
 }
 
 export default Form
