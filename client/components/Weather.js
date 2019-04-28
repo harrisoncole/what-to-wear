@@ -14,8 +14,7 @@ const Weather = ({weather, address, coords}) => {
         {weather.hourly.summary}{' '}
         {roundedPercent(weather.currently.precipProbability)}% chance of{' '}
         {today.precipType ? today.precipType : 'precipitation'} at the moment,
-        and {avgPrecip}% average over the next 8 hours. There's{' '}
-        {roundedPercent(today.cloudCover)}% cloud cover.
+        and {avgPrecip}% average over the next 8 hours.
       </p>
     </div>
   )
