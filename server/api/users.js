@@ -1,17 +1,20 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const db = require('../db/cloudFirestoreInit')
+
 module.exports = router
 
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'email']
+const noDoc = new Error('document does not exist')
+
+router.get('/:profile', async (req, res, next) => {
+  const profiles = db.collection('profiles').doc(req.params.profile)
+  let getProfile = profiles
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        next(noDoc)
+      } else {
+        res.json(doc.data())
+      }
     })
-    res.json(users)
-  } catch (err) {
-    next(err)
-  }
+    .catch(e => next(e))
 })
