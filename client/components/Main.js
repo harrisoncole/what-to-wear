@@ -4,8 +4,13 @@ import CreateIcon from './CreateIcon'
 import Weather from './Weather'
 import Forecast from './Forecast'
 import Location from './Location'
+import Container from './Container'
 import moment from 'moment'
 import Form from './Form'
+import {withRouter, Route, Switch} from 'react-router-dom'
+import Hourly from './Hourly'
+import User from './User'
+
 import {getLatitude, getLongitude, getTime, compareTime} from '../utils'
 
 const Main = () => {
@@ -73,33 +78,25 @@ const Main = () => {
   }, [])
 
   return (
-    <div className="home-container">
-      <h1 className="title">
-        <span>
-          What to Wear <i class="fas fa-globe-americas" />{' '}
-        </span>
-        <span id="tm">powered by Dark Sky</span>
-      </h1>
-      <div className="home-container-inner">
-        <h3>Hello Naked Person.</h3>
-        {!forecast.currently ? (
-          <h2> I'm thinking, okay?</h2>
-        ) : (
-          <div>
-            <Weather weather={forecast} address={address} coords={coords} />
-            <Forecast
-              forecast={forecast}
-              currentTemp={forecast.currently.temperature}
-            />
-            <Form setForecast={setForecast} setAddress={setAddress} />
-          </div>
+    <Switch>
+      <Route
+        exact
+        path="/"
+        component={() => (
+          <Container
+            forecast={forecast}
+            address={address}
+            coords={coords}
+            setForecast={setForecast}
+            setAddress={setAddress}
+            displayButton={displayButton}
+            setDisplayButton={setDisplayButton}
+          />
         )}
-
-        {displayButton && (
-          <CreateIcon prompt={prompt} setDisplayButton={setDisplayButton} />
-        )}
-      </div>
-    </div>
+      />
+      <Route exact path="/hourly" component={Hourly} />
+      <Route exact path="/user" component={User} />
+    </Switch>
   )
 }
 

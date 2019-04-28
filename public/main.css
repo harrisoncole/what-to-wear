@@ -73,3 +73,13 @@ h1 {
 .selected {
   border-bottom: 0.5px solid #05668d;
 }
+
+.profile-selector {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.profile-selector label {
+  margin-left: 10px;
+}

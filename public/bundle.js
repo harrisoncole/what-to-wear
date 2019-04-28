@@ -111,6 +111,65 @@ var App = function App() {
 
 /***/ }),
 
+/***/ "./client/components/Container.js":
+/*!****************************************!*\
+  !*** ./client/components/Container.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _CreateIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateIcon */ "./client/components/CreateIcon.js");
+/* harmony import */ var _Weather__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Weather */ "./client/components/Weather.js");
+/* harmony import */ var _Forecast__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Forecast */ "./client/components/Forecast.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Form */ "./client/components/Form.js");
+
+
+
+
+
+
+var Container = function Container(_ref) {
+  var forecast = _ref.forecast,
+      setForecast = _ref.setForecast,
+      displayButton = _ref.displayButton,
+      setDisplayButton = _ref.setDisplayButton,
+      setAddress = _ref.setAddress,
+      coords = _ref.coords,
+      address = _ref.address;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "home-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "title"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "What to Wear ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    "class": "fas fa-globe-americas"
+  }), ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    id: "tm"
+  }, "powered by Dark Sky")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "home-container-inner"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello Naked Person."), !forecast.currently ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " I'm thinking, okay?") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Weather__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    weather: forecast,
+    address: address,
+    coords: coords
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Forecast__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    forecast: forecast,
+    currentTemp: forecast.currently.temperature
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Form__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    setForecast: setForecast,
+    setAddress: setAddress
+  })), displayButton && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateIcon__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    prompt: prompt,
+    setDisplayButton: setDisplayButton
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Container);
+
+/***/ }),
+
 /***/ "./client/components/CreateIcon.js":
 /*!*****************************************!*\
   !*** ./client/components/CreateIcon.js ***!
@@ -314,6 +373,27 @@ function _formSubmission() {
 
 /***/ }),
 
+/***/ "./client/components/Hourly.js":
+/*!*************************************!*\
+  !*** ./client/components/Hourly.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Hourly = function Hourly() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hourly page goes here");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Hourly);
+
+/***/ }),
+
 /***/ "./client/components/Location.js":
 /*!***************************************!*\
   !*** ./client/components/Location.js ***!
@@ -369,10 +449,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Weather__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Weather */ "./client/components/Weather.js");
 /* harmony import */ var _Forecast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Forecast */ "./client/components/Forecast.js");
 /* harmony import */ var _Location__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Location */ "./client/components/Location.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Form */ "./client/components/Form.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils */ "./client/utils.js");
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Container */ "./client/components/Container.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Form */ "./client/components/Form.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Hourly__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Hourly */ "./client/components/Hourly.js");
+/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./User */ "./client/components/User.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../utils */ "./client/utils.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -384,6 +468,10 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
 
 
 
@@ -436,12 +524,12 @@ var Main = function Main() {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                window.localStorage.setItem('time', JSON.stringify(moment__WEBPACK_IMPORTED_MODULE_6___default()()));
+                window.localStorage.setItem('time', JSON.stringify(moment__WEBPACK_IMPORTED_MODULE_7___default()()));
                 _context.next = 3;
                 return navigator.geolocation.getCurrentPosition(function (pos) {
                   var current = pos.coords.latitude + '_' + pos.coords.longitude;
 
-                  if (Math.floor(Number(Object(_utils__WEBPACK_IMPORTED_MODULE_8__["getLatitude"])())) !== Math.floor(pos.coords.latitude) || Math.floor(Number(Object(_utils__WEBPACK_IMPORTED_MODULE_8__["getLongitude"])())) !== Math.floor(pos.coords.longitude)) {
+                  if (Math.floor(Number(Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLatitude"])())) !== Math.floor(pos.coords.latitude) || Math.floor(Number(Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLongitude"])())) !== Math.floor(pos.coords.longitude)) {
                     window.localStorage.setItem('lat', pos.coords.latitude.toString());
                     window.localStorage.setItem('long', pos.coords.longitude.toString());
                     setCoords(current);
@@ -458,15 +546,15 @@ var Main = function Main() {
       return _getCoords.apply(this, arguments);
     }
 
-    if (Object(_utils__WEBPACK_IMPORTED_MODULE_8__["getLatitude"])() && Object(_utils__WEBPACK_IMPORTED_MODULE_8__["getLongitude"])()) {
-      var now = moment__WEBPACK_IMPORTED_MODULE_6___default()();
-      var then = Object(_utils__WEBPACK_IMPORTED_MODULE_8__["getTime"])();
+    if (Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLatitude"])() && Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLongitude"])()) {
+      var now = moment__WEBPACK_IMPORTED_MODULE_7___default()();
+      var then = Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getTime"])();
 
-      if (Object(_utils__WEBPACK_IMPORTED_MODULE_8__["compareTime"])(now, then) > 10) {
-        setCoords(Object(_utils__WEBPACK_IMPORTED_MODULE_8__["getLatitude"])() + '_' + Object(_utils__WEBPACK_IMPORTED_MODULE_8__["getLongitude"])());
+      if (Object(_utils__WEBPACK_IMPORTED_MODULE_12__["compareTime"])(now, then) > 10) {
+        setCoords(Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLatitude"])() + '_' + Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLongitude"])());
         getCoords();
       } else if (coords.length === 0) {
-        setCoords(Object(_utils__WEBPACK_IMPORTED_MODULE_8__["getLatitude"])() + '_' + Object(_utils__WEBPACK_IMPORTED_MODULE_8__["getLongitude"])());
+        setCoords(Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLatitude"])() + '_' + Object(_utils__WEBPACK_IMPORTED_MODULE_12__["getLongitude"])());
       }
     } else {
       getCoords();
@@ -517,30 +605,29 @@ var Main = function Main() {
       setDisplayButton(true);
     });
   }, []);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "home-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "title"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "What to Wear ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    "class": "fas fa-globe-americas"
-  }), ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    id: "tm"
-  }, "powered by Dark Sky")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "home-container-inner"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello Naked Person."), !forecast.currently ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, " I'm thinking, okay?") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Weather__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    weather: forecast,
-    address: address,
-    coords: coords
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Forecast__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    forecast: forecast,
-    currentTemp: forecast.currently.temperature
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Form__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    setForecast: setForecast,
-    setAddress: setAddress
-  })), displayButton && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateIcon__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    prompt: prompt,
-    setDisplayButton: setDisplayButton
-  })));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
+    exact: true,
+    path: "/",
+    component: function component() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Container__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        forecast: forecast,
+        address: address,
+        coords: coords,
+        setForecast: setForecast,
+        setAddress: setAddress,
+        displayButton: displayButton,
+        setDisplayButton: setDisplayButton
+      });
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
+    exact: true,
+    path: "/hourly",
+    component: _Hourly__WEBPACK_IMPORTED_MODULE_10__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
+    exact: true,
+    path: "/user",
+    component: _User__WEBPACK_IMPORTED_MODULE_11__["default"]
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Main);
@@ -581,6 +668,78 @@ var Navbar = function Navbar() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Navbar);
+
+/***/ }),
+
+/***/ "./client/components/User.js":
+/*!***********************************!*\
+  !*** ./client/components/User.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var User = function User() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('avg'),
+      _useState2 = _slicedToArray(_useState, 2),
+      button = _useState2[0],
+      setButton = _useState2[1];
+
+  var handleChange = function handleChange(evt) {
+    return setButton(event.target.value);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Set Profile Type: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "profile-selector"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    id: "avg",
+    value: "avg",
+    checked: button === 'avg',
+    onChange: handleChange
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    "for": "avg"
+  }, "Average")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    id: "hot",
+    value: "hot",
+    checked: button === 'hot',
+    onChange: handleChange
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    "for": "hot"
+  }, "Hot")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    id: "cold",
+    value: "cold",
+    checked: button === 'cold',
+    onChange: handleChange
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    "for": "cold"
+  }, "Cold")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    id: "shorts",
+    value: "shorts",
+    checked: button === 'shorts',
+    onChange: handleChange
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    "for": "shorts"
+  }, "24/7 Shorts Person")))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (User);
 
 /***/ }),
 
