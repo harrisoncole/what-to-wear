@@ -29,8 +29,9 @@ const Forecast = ({forecast, currentTemp, profile}) => {
       {low === 'NaN' ? (
         <p>loading...</p>
       ) : (
-        <div>
+        <div className="weather-deets">
           <Wardrobe {...props} />
+          <h3>Weather deets:</h3>
           <p>
             {forecast.hourly.summary}{' '}
             {roundedPercent(forecast.currently.precipProbability)}% chance of{' '}
