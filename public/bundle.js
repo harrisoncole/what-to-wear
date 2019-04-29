@@ -278,6 +278,7 @@ var Forecast = function Forecast(_ref) {
       profile = _ref.profile;
   var hourlyArr = forecast.hourly.data.slice(0, 8);
   var precipType = forecast.daily.data[0].precipType;
+  var today = forecast.daily.data[0];
 
   var _maxMetric = Object(_utils__WEBPACK_IMPORTED_MODULE_1__["maxMetric"])(hourlyArr, 'precipIntensity'),
       _maxMetric2 = _slicedToArray(_maxMetric, 2),
@@ -313,7 +314,7 @@ var Forecast = function Forecast(_ref) {
     precipType: precipType,
     profile: profile
   };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, low === 'NaN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Wardrobe__WEBPACK_IMPORTED_MODULE_2__["default"], props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Today's forecast has a low of ", Math.floor(low), "\xB0 at ", lowTime, ", a high of ", Math.ceil(high), "\xB0 at ", highTime, ". There's a ", precipProb, "% average chance of precipitation.", ' ', maxRain > 0.1 && "The most intense precipitation is forecast for ".concat(maxRainTime, ". "), "Humidity will be ", humidity, "% and there's a UV Index of ", uvIndex, ". There will be an average of ", cloudCover, "% cloud cover.")));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, low === 'NaN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Wardrobe__WEBPACK_IMPORTED_MODULE_2__["default"], props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, forecast.hourly.summary, ' ', Object(_utils__WEBPACK_IMPORTED_MODULE_1__["roundedPercent"])(forecast.currently.precipProbability), "% chance of", ' ', today.precipType ? today.precipType : 'precipitation', " at the moment."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Today's forecast has a low of ", Math.floor(low), "\xB0 at ", lowTime, ", a high of ", Math.ceil(high), "\xB0 at ", highTime, ". There's a ", precipProb, "% average chance of precipitation over the next 8 hours.", ' ', maxRain > 0.1 && "The most intense precipitation is forecast for ".concat(maxRainTime, ". "), "Humidity will be ", humidity, "% and there's a UV Index of ", uvIndex, ". There will be an average of ", cloudCover, "% cloud cover.")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Forecast);
@@ -475,7 +476,9 @@ var Hourly = function Hourly(_ref) {
     value: "16"
   }, "16"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
     value: "24"
-  }, "24"))), hourly && hourly.map(function (h) {
+  }, "24"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hourly-card-container"
+  }, hourly && hourly.map(function (h) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HourlyCard__WEBPACK_IMPORTED_MODULE_1__["default"], {
       key: h.time,
       icon: h.icon,
@@ -486,7 +489,7 @@ var Hourly = function Hourly(_ref) {
       summary: h.summary,
       precipIntensity: h.precipIntensity
     });
-  }));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Hourly);
@@ -519,10 +522,10 @@ var HourlyCard = function HourlyCard(_ref) {
       summary = _ref.summary,
       precipIntensity = _ref.precipIntensity;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "hourly-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Icon__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "hourly-item-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", Object(_utils__WEBPACK_IMPORTED_MODULE_1__["unixToTime"])(time), " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Icon__WEBPACK_IMPORTED_MODULE_2__["default"], {
     icon: icon
-  }));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", Math.floor(temp), "\xB0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", summary), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " Chance of precip: ", Object(_utils__WEBPACK_IMPORTED_MODULE_1__["roundedPercent"])(prob), "%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " UV Index: ", uvi));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (HourlyCard);
@@ -1075,13 +1078,12 @@ var Weather = function Weather(_ref) {
   var weather = _ref.weather,
       address = _ref.address,
       coords = _ref.coords;
-  var today = weather.daily.data[0];
   var avgPrecip = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["avgXHrPctMetric"])(weather.hourly.data, 8, 'precipProbability');
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     id: "temp"
   }, weather.currently.temperature, "\xB0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Location__WEBPACK_IMPORTED_MODULE_1__["default"], {
     address: address
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, weather.hourly.summary, ' ', Object(_utils__WEBPACK_IMPORTED_MODULE_2__["roundedPercent"])(weather.currently.precipProbability), "% chance of", ' ', today.precipType ? today.precipType : 'precipitation', " at the moment, and ", avgPrecip, "% average over the next 8 hours."));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Weather);

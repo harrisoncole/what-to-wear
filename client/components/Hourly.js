@@ -27,8 +27,21 @@ const Hourly = ({forecast}) => {
           <option value="24">24</option>
         </select>
       </div>
-
-      {hourly && hourly.map(h => <HourlyCard key={h.time} icon={h.icon} time={h.time} temp={h.temperature} uvi={h.uvIndex} prob={h.precipProbability} summary={h.summary} precipIntensity={h.precipIntensity} />)}
+      <div className="hourly-card-container">
+        {hourly &&
+          hourly.map(h => (
+            <HourlyCard
+              key={h.time}
+              icon={h.icon}
+              time={h.time}
+              temp={h.temperature}
+              uvi={h.uvIndex}
+              prob={h.precipProbability}
+              summary={h.summary}
+              precipIntensity={h.precipIntensity}
+            />
+          ))}
+      </div>
     </div>
   )
 }
