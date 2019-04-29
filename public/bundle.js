@@ -740,21 +740,17 @@ var Main = function Main() {
       _getProfileInfo = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(type) {
-        var _ref, data;
-
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/users/".concat(type));
+                // const {data} = await axios.get(`/api/users/${type}`)
+                setProfile({
+                  name: 'Average',
+                  offset: 0
+                });
 
-              case 2:
-                _ref = _context.sent;
-                data = _ref.data;
-                setProfile(data);
-
-              case 5:
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -824,7 +820,7 @@ var Main = function Main() {
       _getCurrentWeather = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee3(coordStr) {
-        var _ref2, data;
+        var _ref, data;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -834,8 +830,8 @@ var Main = function Main() {
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/weather/".concat(coordStr, "/forecast"));
 
               case 2:
-                _ref2 = _context3.sent;
-                data = _ref2.data;
+                _ref = _context3.sent;
+                data = _ref.data;
                 setForecast(data.forecast);
                 setAddress(data.address);
 
