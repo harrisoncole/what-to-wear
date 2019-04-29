@@ -1,19 +1,37 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import CreateIcon from './CreateIcon'
-import Weather from './Weather'
-import Forecast from './Forecast'
-import Location from './Location'
+import Container from './Container'
 import moment from 'moment'
-import Form from './Form'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
+import Hourly from './Hourly'
+import User from './User'
+import {sendPushNotification} from '../utils'
+import {pushSubscription} from '../app'
+
 import {getLatitude, getLongitude, getTime, compareTime} from '../utils'
 
 const Main = () => {
+  //STATE
   const [forecast, setForecast] = useState({})
   const [coords, setCoords] = useState('')
   const [displayButton, setDisplayButton] = useState(false)
   const [prompt, setPrompt] = useState({})
   const [address, setAddress] = useState('')
+  const [button, setButton] = useState('avg')
+  const [profile, setProfile] = useState({})
+
+  //EFFECTS
+  useEffect(
+    () => {
+      async function getProfileInfo(type) {
+        const {data} = await axios.get(`/api/users/${type}`)
+        setProfile(data)
+      }
+
+      getProfileInfo(button)
+    },
+    [button]
+  )
 
   useEffect(() => {
     async function getCoords() {
@@ -71,33 +89,35 @@ const Main = () => {
   }, [])
 
   return (
-    <div className="home-container">
-      <h1 className="title">
-        <span>
-          What to Wear <i class="fas fa-globe-americas" />{' '}
-        </span>
-        <span id="tm">powered by Dark Sky</span>
-      </h1>
-      <div className="home-container-inner">
-        <h3>Hello Naked Person.</h3>
-        {!forecast.currently ? (
-          <h2> I'm thinking, okay?</h2>
-        ) : (
-          <div>
-            <Weather weather={forecast} address={address} coords={coords} />
-            <Forecast
-              forecast={forecast}
-              currentTemp={forecast.currently.temperature}
-            />
-            <Form />
-          </div>
+    <Switch>
+      <Route
+        exact
+        path="/current"
+        component={() => (
+          <Container
+            forecast={forecast}
+            address={address}
+            coords={coords}
+            setForecast={setForecast}
+            setAddress={setAddress}
+            displayButton={displayButton}
+            setDisplayButton={setDisplayButton}
+            profile={profile}
+          />
         )}
-
-        {displayButton && (
-          <CreateIcon prompt={prompt} setDisplayButton={setDisplayButton} />
-        )}
-      </div>
-    </div>
+      />
+      <Route
+        exact
+        path="/hourly"
+        component={() => <Hourly forecast={forecast} />}
+      />
+      <Route
+        exact
+        path="/user"
+        component={() => <User button={button} setButton={setButton} />}
+      />
+      <Redirect from="/" to="/current" />
+    </Switch>
   )
 }
 

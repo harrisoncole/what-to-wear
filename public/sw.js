@@ -1,7 +1,7 @@
-let cacheName = 'cache-v5'
+let cacheName = 'cache-v12'
 const resourcesToPrecache = [
   'offline.html',
-  'style.css',
+  'main.css',
   'https://use.fontawesome.com/releases/v5.8.1/css/all.css'
 ]
 
@@ -43,4 +43,13 @@ self.addEventListener('fetch', event => {
       //can also match with e.request if all files are in the cache and will return the requested file
     })
   )
+})
+
+self.addEventListener('push', event => {
+  const data = event.data.json()
+  console.log('push received')
+  self.registration.showNotification(data.title, {
+    body: 'notifed by What To Wear!',
+    icon: '/images/icons/icon-72x72.png'
+  })
 })

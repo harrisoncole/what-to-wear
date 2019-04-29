@@ -2,14 +2,25 @@ const path = require('path')
 const fs = require('fs')
 const express = require('express')
 const morgan = require('morgan')
+const webpush = require('web-push')
 const compression = require('compression')
 // const session = require('express-session')
 const passport = require('passport')
 const PORT = process.env.PORT || 8081
 const app = express()
 const socketio = require('socket.io')
-
+const db = require('./db/cloudFirestoreInit')
 module.exports = app
+
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config()
+}
+
+webpush.setVapidDetails(
+  'mailto: test@test.com',
+  process.env.PUBLIC_VAPID_KEY,
+  process.env.PRIVATE_VAPID_KEY
+)
 
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
@@ -53,6 +64,20 @@ const createApp = () => {
   // app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
 
+  //push notification
+  app.post('/subscribe', (req, res, next) => {
+    //get push subscription object
+    const subscription = req.body
+
+    res.status(201).json({})
+
+    //create payload
+    const payload = JSON.stringify({title: 'Thanks for checking the weather!'})
+
+    //Pass object into sendNotification
+    webpush.sendNotification(subscription, payload).catch(e => next(e))
+  })
+
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
 
@@ -81,18 +106,7 @@ const createApp = () => {
 }
 
 const startListening = () => {
-  // start listening (and create a 'server' object representing our server)
-  let server
-  // if (process.env.NODE_ENV === 'development') {
-  //   server = https.createServer(certOptions, app).listen(PORT)
-  //   console.log(`Secure cloud cover on port ${PORT}`)
-  // } else {
-  //   server = app.listen(PORT, () => {
-  //     console.log(`Cloud cover on port ${PORT}`)
-  //   })
-  // }
-
-  server = app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log('Cloud cover on port ', PORT)
   })
   // set up our socket control center
