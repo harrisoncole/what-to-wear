@@ -9,7 +9,7 @@ const passport = require('passport')
 const PORT = process.env.PORT || 8081
 const app = express()
 const socketio = require('socket.io')
-const db = require('./db/cloudFirestoreInit')
+// const db = require('./db/cloudFirestoreInit')
 module.exports = app
 
 if (process.env.NODE_ENV === 'development') {
