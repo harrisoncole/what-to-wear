@@ -314,7 +314,9 @@ var Forecast = function Forecast(_ref) {
     precipType: precipType,
     profile: profile
   };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, low === 'NaN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Wardrobe__WEBPACK_IMPORTED_MODULE_2__["default"], props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, forecast.hourly.summary, ' ', Object(_utils__WEBPACK_IMPORTED_MODULE_1__["roundedPercent"])(forecast.currently.precipProbability), "% chance of", ' ', today.precipType ? today.precipType : 'precipitation', " at the moment."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Today's forecast has a low of ", Math.floor(low), "\xB0 at ", lowTime, ", a high of ", Math.ceil(high), "\xB0 at ", highTime, ". There's a ", precipProb, "% average chance of precipitation over the next 8 hours.", ' ', maxRain > 0.1 && "The most intense precipitation is forecast for ".concat(maxRainTime, ". "), "Humidity will be ", humidity, "% and there's a UV Index of ", uvIndex, ". There will be an average of ", cloudCover, "% cloud cover.")));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, low === 'NaN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "weather-deets"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Wardrobe__WEBPACK_IMPORTED_MODULE_2__["default"], props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Weather deets:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, forecast.hourly.summary, ' ', Object(_utils__WEBPACK_IMPORTED_MODULE_1__["roundedPercent"])(forecast.currently.precipProbability), "% chance of", ' ', today.precipType ? today.precipType : 'precipitation', " at the moment."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Today's forecast has a low of ", Math.floor(low), "\xB0 at ", lowTime, ", a high of ", Math.ceil(high), "\xB0 at ", highTime, ". There's a ", precipProb, "% average chance of precipitation over the next 8 hours.", ' ', maxRain > 0.1 && "The most intense precipitation is forecast for ".concat(maxRainTime, ". "), "Humidity will be ", humidity, "% and there's a UV Index of ", uvIndex, ". There will be an average of ", cloudCover, "% cloud cover.")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Forecast);
@@ -1034,23 +1036,35 @@ var Wardrobe = function Wardrobe(_ref) {
   var umbrella = precipProb > 15 && precipType !== 'snow';
   var jacket = false;
   var sungear = uvIndex > 5.9;
+  var top = 'tee shirt or dress or something light';
+  var bottom = "shorts...or just skip the top and throw on a dress if that's your thing";
 
   if (high < 32 - offset) {
     jacket = 'parka';
+    bottom = 'warm pants';
+    top = 'sweater or hoodie';
     umbrella = false;
   } else if (high < 40 - offset) {
     jacket = 'winter coat';
+    bottom = 'pants';
+    top = 'long-sleeved shirt or top';
   } else if (high < 50 - offset) {
     jacket = 'midweight jacket';
+    bottom = 'pants';
+    top = 'long-sleeved shirt or top';
   } else if (high < 60 - offset) {
     jacket = 'light jacket';
+    bottom = 'pants';
+    top = 'short sleeved top with a sweater';
   } else if (high < 65 - offset) {
     jacket = 'sweater or very light jacket';
+    bottom = 'pants';
+    top = 'short sleeved top';
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "clothing-recs"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Here are my thoughts on clothes: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, umbrella && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " Bring an umbrella! "), jacket ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " You'll want a ", jacket, " for this weather. ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " No need for a jacket today! "), sungear && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, ' ', "There's a high UV index today, so wear sunscreen or bring a hat!", ' '), profile.clothing === 'shorts' && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "You'll probably want to wear shorts too, because that's your kind of thing.")));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Here's what to wear: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "I suggest a ", top, " and", ' ', profile.clothing === 'shorts' ? 'shorts. Because you love shorts' : bottom, "."), jacket ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " You'll also want a ", jacket, " for this weather. ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " No need for a jacket today! "), sungear && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, ' ', "There's a high UV index today, so wear sunscreen or bring a hat!", ' '), umbrella && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " Bring an umbrella! ")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Wardrobe);
@@ -55198,7 +55212,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
