@@ -19,7 +19,7 @@ const Wardrobe = ({
   let sungear = uvIndex > 5.9
   let top = 'tee shirt or dress or something light'
   let bottom =
-    "shorts baby! or just skip the top and throw on a dress if that's your thing"
+    "shorts...or just skip the top and throw on a dress if that's your thing"
 
   if (high < 32 - offset) {
     jacket = 'parka'
@@ -48,27 +48,24 @@ const Wardrobe = ({
     <div className="clothing-recs">
       <h3> Here's what to wear: </h3>
       <ul>
-        {umbrella && <li> Bring an umbrella! </li>}
+        <li>
+          I suggest a {top} and{' '}
+          {profile.clothing === 'shorts'
+            ? 'shorts. Because you love shorts'
+            : bottom}.
+        </li>
         {jacket ? (
-          <li> You'll want a {jacket} for this weather. </li>
+          <li> You'll also want a {jacket} for this weather. </li>
         ) : (
           <li> No need for a jacket today! </li>
         )}
-        <li>
-          I suggest a {top} and {bottom}.
-        </li>
         {sungear && (
           <li>
             {' '}
             There's a high UV index today, so wear sunscreen or bring a hat!{' '}
           </li>
         )}
-        {profile.clothing === 'shorts' && (
-          <li>
-            You'll probably want to wear shorts too, because that's your kind of
-            thing.
-          </li>
-        )}
+        {umbrella && <li> Bring an umbrella! </li>}
       </ul>
     </div>
   )

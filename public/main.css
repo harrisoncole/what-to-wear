@@ -145,3 +145,7 @@ h1 {
 .weather-deets h3 {
   text-align: left;
 }
+
+.zip-search {
+  margin-top: 30px;
+}

@@ -1037,7 +1037,7 @@ var Wardrobe = function Wardrobe(_ref) {
   var jacket = false;
   var sungear = uvIndex > 5.9;
   var top = 'tee shirt or dress or something light';
-  var bottom = "shorts baby! or just skip the top and throw on a dress if that's your thing";
+  var bottom = "shorts...or just skip the top and throw on a dress if that's your thing";
 
   if (high < 32 - offset) {
     jacket = 'parka';
@@ -1064,7 +1064,7 @@ var Wardrobe = function Wardrobe(_ref) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "clothing-recs"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Here's what to wear: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, umbrella && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " Bring an umbrella! "), jacket ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " You'll want a ", jacket, " for this weather. ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " No need for a jacket today! "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "I suggest a ", top, " and ", bottom, "."), sungear && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, ' ', "There's a high UV index today, so wear sunscreen or bring a hat!", ' '), profile.clothing === 'shorts' && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "You'll probably want to wear shorts too, because that's your kind of thing.")));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Here's what to wear: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "I suggest a ", top, " and", ' ', profile.clothing === 'shorts' ? 'shorts. Because you love shorts' : bottom, "."), jacket ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " You'll also want a ", jacket, " for this weather. ") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " No need for a jacket today! "), sungear && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, ' ', "There's a high UV index today, so wear sunscreen or bring a hat!", ' '), umbrella && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, " Bring an umbrella! ")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Wardrobe);
@@ -55212,7 +55212,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
