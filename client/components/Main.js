@@ -24,8 +24,8 @@ const Main = () => {
   useEffect(
     () => {
       async function getProfileInfo(type) {
-        // const {data} = await axios.get(`/api/users/${type}`)
-        setProfile({name: 'Average', offset: 0})
+        const {data} = await axios.get(`/api/users/${type}`)
+        setProfile({data})
       }
 
       getProfileInfo(button)
