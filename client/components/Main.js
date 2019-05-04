@@ -5,8 +5,8 @@ import moment from 'moment'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Hourly from './Hourly'
 import User from './User'
-import {sendPushNotification} from '../utils'
-import {pushSubscription} from '../app'
+// import {sendPushNotification} from '../utils'
+// import {pushSubscription} from '../app'
 
 import {getLatitude, getLongitude, getTime, compareTime} from '../utils'
 

@@ -5,7 +5,7 @@ import Banner from './components/Banner'
 import {registerSW} from './utils'
 // import Routes from './routes'
 
-export const pushSubscription = registerSW()
+// export const pushSubscription = registerSW()
 
 const App = () => {
   return (
